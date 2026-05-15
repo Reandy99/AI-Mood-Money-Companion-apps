@@ -2,6 +2,7 @@ import cron from 'node-cron'
 import { createServiceClient } from '@/lib/supabase/service'
 import { receiptScannerAgent } from '@/lib/agents/receipt-scanner'
 import { patternAnalystAgent } from '@/lib/agents/pattern-analyst'
+import { dailySummaryAgent } from '@/lib/agents/daily-summary'
 
 export function initializeCronJobs() {
   console.log('[Cron] Initializing scheduled jobs...')
@@ -36,6 +37,42 @@ export function initializeCronJobs() {
       console.log('[Cron] Daily receipt scanner completed')
     } catch (error) {
       console.error('[Cron] Error in daily receipt scanner:', error)
+    }
+  }, {
+    timezone: 'Asia/Jakarta'
+  })
+
+  // Daily summary notification - runs at 22:05 WIB (15:05 UTC)
+  // 5 minutes after receipt scanner to ensure all receipts are processed
+  cron.schedule('5 15 * * *', async () => {
+    console.log('[Cron] Running daily summary notification...')
+    
+    try {
+      const supabase = createServiceClient()
+      
+      // Get all active users
+      const { data: users, error } = await supabase
+        .from('users')
+        .select('id')
+        .not('onboarded_at', 'is', null)
+
+      if (error) throw error
+
+      console.log(`[Cron] Found ${users?.length || 0} users for daily summary`)
+
+      // Run daily summary for each user
+      for (const user of users || []) {
+        try {
+          await dailySummaryAgent(user.id)
+          console.log(`[Cron] Sent daily summary to user ${user.id}`)
+        } catch (error) {
+          console.error(`[Cron] Failed to send summary to user ${user.id}:`, error)
+        }
+      }
+
+      console.log('[Cron] Daily summary notification completed')
+    } catch (error) {
+      console.error('[Cron] Error in daily summary notification:', error)
     }
   }, {
     timezone: 'Asia/Jakarta'
@@ -78,5 +115,6 @@ export function initializeCronJobs() {
 
   console.log('[Cron] Scheduled jobs initialized:')
   console.log('  - Daily receipt scanner: 22:00 WIB')
+  console.log('  - Daily summary notification: 22:05 WIB')
   console.log('  - Weekly pattern analyst: Monday 08:00 WIB')
 }

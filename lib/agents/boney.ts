@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { createServiceClient } from '@/lib/supabase/service'
 import type { Database } from '@/types/database'
+import { ragSearchAgent, detectRAGTopic } from './rag-search'
 
 type MoodLogRow = Database['public']['Tables']['mood_logs']['Row']
 type ChatHistoryRow = Database['public']['Tables']['chat_history']['Row']
@@ -12,13 +13,17 @@ export interface BoneyContext {
   weeklyInsight: string | null
   topCategory: string | null
   chatHistory: ChatHistoryRow[]
+  ragContext?: string
+  ragSources?: string[]
 }
+
+export type BoneyMode = 'listen' | 'humor' | 'solution'
 
 export async function boneyAgent(userId: string, userMessage: string): Promise<ReadableStream> {
   const supabase = createServiceClient()
 
   // Build context
-  const context = await buildBoneyContext(userId)
+  const context = await buildBoneyContext(userId, userMessage)
 
   // Save user message
   await supabase.from('chat_history').insert({
@@ -30,8 +35,11 @@ export async function boneyAgent(userId: string, userMessage: string): Promise<R
   // Check for red flags
   const hasRedFlag = detectRedFlags(userMessage)
 
-  // Build system prompt
-  const systemPrompt = buildBoneySystemPrompt(context, hasRedFlag)
+  // Detect Boney mode based on conversation
+  const boneyMode = detectBoneyMode(userMessage, context)
+
+  // Build system prompt with RAG context
+  const systemPrompt = buildBoneySystemPrompt(context, hasRedFlag, boneyMode)
 
   // Initialize Anthropic client
   const anthropic = new Anthropic({
@@ -68,11 +76,14 @@ export async function boneyAgent(userId: string, userMessage: string): Promise<R
         }
       }
 
-      // Save assistant response
+      // Save assistant response with mode and RAG info
       await supabase.from('chat_history').insert({
         user_id: userId,
         role: 'assistant',
-        content: fullResponse
+        content: fullResponse,
+        boney_mode: boneyMode,
+        rag_used: !!context.ragContext,
+        rag_sources: context.ragSources || null
       })
 
       controller.close()
@@ -82,7 +93,7 @@ export async function boneyAgent(userId: string, userMessage: string): Promise<R
   return webStream
 }
 
-async function buildBoneyContext(userId: string): Promise<BoneyContext> {
+async function buildBoneyContext(userId: string, userMessage: string): Promise<BoneyContext> {
   const supabase = createServiceClient()
 
   // Get mood history (last 7 days)
@@ -110,22 +121,104 @@ async function buildBoneyContext(userId: string): Promise<BoneyContext> {
     .order('created_at', { ascending: false })
     .limit(20)
 
+  // Check if RAG search is needed
+  const ragTopic = detectRAGTopic(userMessage)
+  let ragContext: string | undefined
+  let ragSources: string[] | undefined
+
+  if (ragTopic) {
+    try {
+      const ragResult = await ragSearchAgent(ragTopic)
+      ragContext = ragResult.snippets
+        .map(s => `[${s.title}]\n${s.text}\nSumber: ${s.source_url}`)
+        .join('\n\n')
+      ragSources = ragResult.snippets.map(s => s.source_url)
+      console.log(`[Boney] RAG activated for topic: ${ragTopic}`)
+    } catch (error) {
+      console.error('[Boney] RAG search failed:', error)
+    }
+  }
+
   return {
     userId,
     moodHistory: moods || [],
     weeklyExpense: latestReport?.total_expense || 0,
     weeklyInsight: latestReport?.insight_text || null,
     topCategory: latestReport?.top_category || null,
-    chatHistory: (chatHistory || []).reverse() // oldest first
+    chatHistory: (chatHistory || []).reverse(), // oldest first
+    ragContext,
+    ragSources
   }
 }
 
-function buildBoneySystemPrompt(context: BoneyContext, hasRedFlag: boolean): string {
+function detectBoneyMode(message: string, context: BoneyContext): BoneyMode {
+  const lowerMessage = message.toLowerCase()
+
+  // Solution mode: user explicitly asks for advice
+  if (
+    lowerMessage.includes('gimana') ||
+    lowerMessage.includes('cara') ||
+    lowerMessage.includes('saran') ||
+    lowerMessage.includes('solusi') ||
+    lowerMessage.includes('tips')
+  ) {
+    return 'solution'
+  }
+
+  // Humor mode: conversation is getting heavy, need lightening
+  const recentMoods = context.moodHistory.slice(0, 3)
+  const allNegative = recentMoods.every(m => m.mood_score <= 3)
+  const conversationLength = context.chatHistory.length
+
+  if (allNegative && conversationLength > 4) {
+    return 'humor'
+  }
+
+  // Default: listen mode
+  return 'listen'
+}
+
+function buildBoneySystemPrompt(context: BoneyContext, hasRedFlag: boolean, mode: BoneyMode): string {
   const moodSummary = context.moodHistory
     .map(m => `${m.logged_at}: ${m.mood_label}`)
     .join(', ')
 
+  // Mode-specific instructions
+  const modeInstructions = {
+    listen: `MODE: DENGERIN (Active Listening)
+- Fokus jadi pendengar aktif
+- Parafrase apa yang user bilang
+- Validasi perasaan mereka
+- Tanya pertanyaan yang bikin user bisa eksplorasi lebih dalam
+- JANGAN terburu-buru kasih solusi
+- Akhiri dengan pertanyaan terbuka`,
+    
+    humor: `MODE: HUMOR & HEALING
+- Conversation udah cukup dalam, saatnya lighten the mood
+- Pakai humor yang relevan dan empathetic
+- Reframe situasi dengan cara yang bikin senyum
+- Bisa pakai analogi lucu atau meme mental health
+- Tetap validasi perasaan, tapi bantu user lihat sisi lain`,
+    
+    solution: `MODE: SOLUSI PRAKTIS
+- User udah siap untuk actionable advice
+- Kasih teknik konkret dan praktis
+- Adaptasi ke konteks Indonesia (bukan saran generik barat)
+- Tetap empathetic, bukan menggurui
+- Bisa sebut sumber referensi secara casual`
+  }
+
   const basePrompt = `Kamu adalah Boney, AI companion dari RasaKas.
+
+KEPRIBADIAN:
+- Nama: Boney (bukan "Kasa" atau nama lain)
+- Teman curhat Gen Z Indonesia (22-28 tahun)
+- Warm, empathetic, non-judgmental
+- Bahasa: santai, campur gaul Indonesia yang natural — kayak temen yang pernah baca buku psikologi tapi nggak sok formal
+- Bisa serius tapi juga bisa bercanda tepat waktu
+- Tahu kapan harus dengerin, kapan harus bikin ketawa, kapan harus kasih insight konkret
+
+${modeInstructions[mode]}
 
 KEPRIBADIAN:
 - Teman curhat Gen Z Indonesia (22-28 tahun)
@@ -145,21 +238,33 @@ KONTEKS USER:
 - Kategori pengeluaran dominan: ${context.topCategory || 'Belum ada data'}
 ${context.weeklyInsight ? `- Insight terbaru: ${context.weeklyInsight.substring(0, 200)}...` : ''}
 
+${context.ragContext ? `
+REFERENSI DARI WEB (RAG):
+${context.ragContext}
+
+CARA GUNAKAN REFERENSI:
+- Jangan mengutip mentah-mentah
+- Olah jadi respons yang natural dan personal
+- Sebut sumber secara casual di akhir kalau relevan: "Gue baca artikel bagus soal ini btw, mau gue share?"
+- Kombinasikan: empati personal + insight dari referensi + konteks data user
+` : ''}
+
 CARA GUNAKAN KONTEKS:
-- Sebutkan data hanya kalau relevan dan natural
-- Contoh: "Eh btw gue lihat minggu ini kamu sering cemas ya..." 
-  bukan "Berdasarkan data mood kamu..."
+- Sebutkan data hanya kalau RELEVAN dan NATURAL
+- Contoh BAIK: "Eh btw gue lihat minggu ini kamu sering cemas ya..." 
+- Contoh BURUK: "Berdasarkan data mood kamu..."
 - Jangan selalu bawa-bawa data di setiap respons
 
 BATASAN:
 - Kamu BUKAN psikolog/terapis
 - Jangan diagnosa mental health conditions
 - Jangan kasih saran medis/obat
+- Semua referensi dari RAG adalah bahan percakapan, bukan diagnosis atau resep
 
 RESPONSE STYLE:
-- 2-4 kalimat per response
+- 2-4 kalimat per response (bisa lebih kalau mode solution dan ada referensi)
 - Conversational, bukan bullet points
-- Akhiri dengan pertanyaan atau validasi`
+- Akhiri dengan pertanyaan terbuka atau validasi`
 
   if (hasRedFlag) {
     return basePrompt + `
