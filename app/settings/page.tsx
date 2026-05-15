@@ -129,8 +129,7 @@ export default function SettingsPage() {
             </h2>
             <div className="space-y-3 text-base text-[#718096]">
               <p><span className="font-bold text-[#2D3748]">Versi:</span> 1.0.0</p>
-              <p><span className="font-bold text-[#2D3748]">Build:</span> OpenClaw Agenthon 2026</p>
-              <p><span className="font-bold text-[#2D3748]">AI Model:</span> Claude Sonnet 4</p>
+              <p><span className="font-bold text-[#2D3748]">AI Model:</span> Claude Sonnet 4.6</p>
             </div>
             <div className="mt-5 pt-5 border-t border-[#E2E8F0]">
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-[#FF6B9D] hover:underline text-base font-medium">

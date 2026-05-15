@@ -10,16 +10,8 @@ export default function DashboardPage() {
   const [weeklyMoods, setWeeklyMoods] = useState<any[]>([])
 
   useEffect(() => {
-    // TODO: Check if user has checked in today
-    // If not, redirect to /mood
-    
-    // Mock data for now
     setTimeout(() => {
-      setTodayMood({
-        mood_type: 'happy',
-        mood_label: 'Bahagia',
-        logged_at: new Date().toISOString().split('T')[0]
-      })
+      setTodayMood({ mood_type: 'happy', mood_label: 'Bahagia', logged_at: new Date().toISOString().split('T')[0] })
       setWeeklyMoods([
         { mood_type: 'happy', logged_at: '2026-05-15' },
         { mood_type: 'calm', logged_at: '2026-05-14' },
@@ -30,168 +22,159 @@ export default function DashboardPage() {
         { mood_type: 'tired', logged_at: '2026-05-09' },
       ])
       setLoading(false)
-    }, 500)
+    }, 400)
   }, [])
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="neo-spinner mx-auto mb-4"></div>
-          <p className="text-[#6B7280] font-medium">Loading...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--rk-page)' }}>
+        <div className="neo-spinner mx-auto" />
       </div>
     )
   }
 
+  const todayConfig = MOOD_CONFIG[todayMood?.mood_type as keyof typeof MOOD_CONFIG]
+  const today = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' })
+
   return (
-    <div className="min-h-screen p-6 md:p-10 relative overflow-hidden pb-24 md:pb-10">
-      {/* Decorative Background */}
-      <div className="decorative-circle bg-gradient-pink" style={{ top: '5%', right: '10%' }}></div>
-      <div className="decorative-circle bg-gradient-mint" style={{ bottom: '10%', left: '5%' }}></div>
+    <div className="min-h-screen pb-28 md:pb-10" style={{ background: 'var(--rk-page)' }}>
+      <div className="max-w-2xl mx-auto px-5 pt-7 md:pt-10 space-y-4">
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="mb-10 animate-fade-in-up">
-          <h1 className="text-5xl md:text-6xl font-[var(--font-outfit)] font-black text-[#1F2937] mb-3">
-            Halo! 👋
+        {/* Greeting */}
+        <div className="animate-fade-in-up">
+          <p className="text-xs font-bold text-rk-subtle uppercase tracking-widest mb-1">{today}</p>
+          <h1 className="text-3xl font-[var(--font-outfit)] font-black text-rk-ink">
+            Halo kamu! <span className="inline-block motion-safe:animate-float-gentle">👋</span>
           </h1>
-          <p className="text-xl text-[#6B7280] font-medium">
-            {new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-          </p>
         </div>
 
-        {/* Main Grid - Desktop Optimized */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-          {/* Left Column - Today's Mood + Weekly Strip */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Today's Mood - Larger on Desktop */}
-            {todayMood && (
-              <div className="neo-card p-8 animate-fade-in-up stagger-1">
-                <div className="flex items-center gap-6">
-                  <div 
-                    className="w-24 h-24 rounded-full flex items-center justify-center text-6xl flex-shrink-0"
-                    style={{ background: MOOD_CONFIG[todayMood.mood_type as keyof typeof MOOD_CONFIG]?.color + '30' }}
-                  >
-                    {MOOD_CONFIG[todayMood.mood_type as keyof typeof MOOD_CONFIG]?.emoji}
-                  </div>
-                  <div>
-                    <p className="text-base text-[#6B7280] font-medium mb-1">Mood Hari Ini</p>
-                    <p className="text-4xl font-[var(--font-outfit)] font-black text-[#1F2937]">
-                      {todayMood.mood_label}
-                    </p>
-                    <p className="text-sm text-[#9CA3AF] mt-2">Terakhir update: 09:30 WIB</p>
-                  </div>
-                </div>
+        {/* Today's mood hero */}
+        {todayMood && (
+          <div className="bg-white rounded-3xl p-5 shadow-rk-card animate-fade-in-up stagger-1 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 rounded-bl-[3rem] opacity-15"
+              style={{ background: todayConfig?.color }} />
+            <p className="text-xs font-bold text-rk-subtle uppercase tracking-widest mb-3">Mood Hari Ini</p>
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+                style={{ background: todayConfig?.color + '25' }}>
+                {todayConfig?.emoji}
               </div>
-            )}
-
-            {/* Weekly Mood Strip - Horizontal on Desktop */}
-            <div className="neo-card p-8 animate-fade-in-up stagger-2">
-              <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#1F2937] mb-6">
-                Mood 7 Hari Terakhir
-              </h2>
-              <div className="grid grid-cols-7 gap-4">
-                {weeklyMoods.map((mood, index) => {
-                  const config = MOOD_CONFIG[mood.mood_type as keyof typeof MOOD_CONFIG]
-                  const date = new Date(mood.logged_at)
-                  return (
-                    <div
-                      key={index}
-                      className="neo-card p-5 text-center"
-                      style={{ backgroundColor: `${config?.color}20` }}
-                    >
-                      <div className="text-4xl mb-3">{config?.emoji}</div>
-                      <p className="text-xs text-[#6B7280] font-bold">
-                        {date.toLocaleDateString('id-ID', { weekday: 'short' })}
-                      </p>
-                      <p className="text-xs text-[#9CA3AF] mt-1">
-                        {date.getDate()}
-                      </p>
-                    </div>
-                  )
-                })}
+              <div className="flex-1 min-w-0">
+                <p className="text-2xl font-[var(--font-outfit)] font-black text-rk-ink leading-tight">
+                  {todayMood.mood_label}
+                </p>
+                <p className="text-xs text-rk-subtle mt-0.5">Update terakhir 09:30 WIB</p>
               </div>
+              <Link href="/mood"
+                className="flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full transition-colors"
+                style={{ background: todayConfig?.color + '20', color: todayConfig?.color }}>
+                Edit
+              </Link>
             </div>
           </div>
+        )}
 
-          {/* Right Column - Quick Stats */}
-          <div className="space-y-6">
-            <div className="neo-card p-6 animate-fade-in-up stagger-3">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-14 h-14 rounded-full bg-gradient-peach flex items-center justify-center text-3xl">
-                  💰
-                </div>
-                <p className="text-sm text-[#6B7280] font-semibold">Total Pengeluaran</p>
-              </div>
-              <p className="text-4xl font-[var(--font-mono)] font-bold text-[#1F2937] mb-1">
-                Rp 0
-              </p>
-              <p className="text-xs text-[#9CA3AF]">Minggu ini</p>
-            </div>
-
-            <div className="neo-card p-6 animate-fade-in-up stagger-3">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-14 h-14 rounded-full bg-gradient-mint flex items-center justify-center text-3xl">
-                  😊
-                </div>
-                <p className="text-sm text-[#6B7280] font-semibold">Mood Dominan</p>
-              </div>
-              <p className="text-4xl font-[var(--font-outfit)] font-bold text-[#1F2937] mb-1">
-                Bahagia
-              </p>
-              <p className="text-xs text-[#9CA3AF]">7 hari terakhir</p>
-            </div>
-
-            <div className="neo-card p-6 animate-fade-in-up stagger-3">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-14 h-14 rounded-full bg-gradient-lavender flex items-center justify-center text-3xl">
-                  🔥
-                </div>
-                <p className="text-sm text-[#6B7280] font-semibold">Streak Check-In</p>
-              </div>
-              <p className="text-4xl font-[var(--font-mono)] font-bold text-[#1F2937] mb-1">
-                7 hari
-              </p>
-              <p className="text-xs text-[#9CA3AF]">Pertahankan!</p>
-            </div>
+        {/* Stats row */}
+        <div className="grid grid-cols-2 gap-3 animate-fade-in-up stagger-2">
+          <div className="bg-white rounded-3xl p-4 shadow-rk-card"
+            style={{ background: 'linear-gradient(135deg, #fff7ed, #fff)' }}>
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg mb-2"
+              style={{ background: '#fbbf2420' }}>🔥</div>
+            <p className="text-2xl font-[var(--font-outfit)] font-black text-rk-ink">7</p>
+            <p className="text-[11px] font-bold text-rk-subtle uppercase tracking-wide mt-0.5">Hari Streak</p>
+          </div>
+          <div className="bg-white rounded-3xl p-4 shadow-rk-card"
+            style={{ background: 'linear-gradient(135deg, #f0f9ff, #fff)' }}>
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg mb-2"
+              style={{ background: '#7c3aed15' }}>💸</div>
+            <p className="text-2xl font-[var(--font-mono)] font-black text-rk-ink">Rp 0</p>
+            <p className="text-[11px] font-bold text-rk-subtle uppercase tracking-wide mt-0.5">Minggu Ini</p>
           </div>
         </div>
 
-        {/* CTA Cards - Full Width on Desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link href="/chat" className="neo-card p-8 animate-fade-in-up stagger-4 hover:scale-105 transition-all cursor-pointer">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 rounded-full bg-gradient-pink flex items-center justify-center text-4xl flex-shrink-0">
-                💬
-              </div>
-              <div>
-                <h3 className="text-2xl font-[var(--font-outfit)] font-bold text-[#1F2937] mb-2">
-                  Chat dengan Boney
-                </h3>
-                <p className="text-base text-[#6B7280] font-medium">
-                  Curhat atau minta insight tentang pola pengeluaran kamu
-                </p>
-              </div>
-            </div>
+        {/* 7-day mood strip */}
+        <div className="bg-white rounded-3xl p-5 shadow-rk-card animate-fade-in-up stagger-3">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-[var(--font-outfit)] font-extrabold text-rk-ink text-base">
+              Mood 7 Hari
+            </h2>
+            <Link href="/calendar" className="text-xs font-bold text-rk-subtle hover:text-rk-ink transition-colors">
+              Lihat semua →
+            </Link>
+          </div>
+          <div className="grid grid-cols-7 gap-1.5">
+            {weeklyMoods.map((mood, i) => {
+              const config = MOOD_CONFIG[mood.mood_type as keyof typeof MOOD_CONFIG]
+              const date = new Date(mood.logged_at)
+              const isToday = i === 0
+              return (
+                <div key={i}
+                  className="rounded-xl py-2 px-1 text-center transition-transform hover:scale-105"
+                  style={{
+                    background: config?.color + '22',
+                    outline: isToday ? `2px solid ${config?.color}` : 'none',
+                    outlineOffset: '1px',
+                  }}>
+                  <div className="text-xl mb-0.5">{config?.emoji}</div>
+                  <p className="text-[9px] font-bold text-rk-muted leading-none">
+                    {date.toLocaleDateString('id-ID', { weekday: 'short' })}
+                  </p>
+                  <p className="text-[9px] text-rk-subtle">{date.getDate()}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Mood dominan */}
+        <div className="bg-white rounded-3xl p-4 shadow-rk-card animate-fade-in-up stagger-3 flex items-center gap-4"
+          style={{ background: 'linear-gradient(135deg, #f0fdf4, #fff)' }}>
+          <div className="w-10 h-10 rounded-2xl bg-[#10b981]/15 flex items-center justify-center text-xl flex-shrink-0">
+            😊
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-[11px] font-bold text-rk-subtle uppercase tracking-wide">Mood Dominan Minggu Ini</p>
+            <p className="text-xl font-[var(--font-outfit)] font-black text-rk-ink">Bahagia</p>
+          </div>
+          <span className="text-2xl">✨</span>
+        </div>
+
+        {/* CTA cards */}
+        <div className="grid grid-cols-2 gap-3 animate-fade-in-up stagger-4">
+          <Link href="/chat"
+            className="bg-white rounded-3xl p-5 shadow-rk-card hover:-translate-y-0.5 transition-all duration-200 group"
+            style={{ background: 'linear-gradient(135deg, #fff1f2, #fff)' }}>
+            <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">💬</div>
+            <p className="font-[var(--font-outfit)] font-extrabold text-rk-ink text-sm mb-1">Chat Boney</p>
+            <p className="text-rk-muted text-xs leading-relaxed">Curhat atau minta insight</p>
+            <p className="mt-2 text-xs font-black" style={{ color: 'var(--rk-coral-1)' }}>Mulai →</p>
           </Link>
 
-          <Link href="/report" className="neo-card p-8 animate-fade-in-up stagger-4 hover:scale-105 transition-all cursor-pointer">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 rounded-full bg-gradient-mint flex items-center justify-center text-4xl flex-shrink-0">
-                📊
-              </div>
-              <div>
-                <h3 className="text-2xl font-[var(--font-outfit)] font-bold text-[#1F2937] mb-2">
-                  Weekly Report
-                </h3>
-                <p className="text-base text-[#6B7280] font-medium">
-                  Analisis korelasi mood vs pengeluaran minggu ini
-                </p>
-              </div>
-            </div>
+          <Link href="/report"
+            className="bg-white rounded-3xl p-5 shadow-rk-card hover:-translate-y-0.5 transition-all duration-200 group"
+            style={{ background: 'linear-gradient(135deg, #f5f3ff, #fff)' }}>
+            <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">📊</div>
+            <p className="font-[var(--font-outfit)] font-extrabold text-rk-ink text-sm mb-1">Weekly Report</p>
+            <p className="text-rk-muted text-xs leading-relaxed">Korelasi mood & pengeluaran</p>
+            <p className="mt-2 text-xs font-black" style={{ color: 'var(--rk-iris-1)' }}>Lihat →</p>
           </Link>
         </div>
+
+        {/* Today's expenses placeholder */}
+        <div className="bg-white rounded-3xl p-5 shadow-rk-card animate-fade-in-up stagger-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-[var(--font-outfit)] font-extrabold text-rk-ink text-base">
+              Pengeluaran Hari Ini
+            </h2>
+            <span className="text-xs font-bold text-rk-subtle">Rp 0</span>
+          </div>
+          <div className="flex flex-col items-center py-6 text-center">
+            <span className="text-4xl mb-2 opacity-50">🧾</span>
+            <p className="text-sm text-rk-subtle font-medium">Belum ada receipt</p>
+            <p className="text-xs text-rk-subtle mt-1">Agent scan email jam 22:00</p>
+          </div>
+        </div>
+
       </div>
     </div>
   )
