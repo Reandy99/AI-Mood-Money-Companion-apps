@@ -1,4 +1,4 @@
-# RasaKas - Redesign Summary
+# Boney.AI - Redesign Summary
 
 **Style:** Neomorphism + Playful Illustrations  
 **Inspiration:** Modern app UI with cute characters and soft shadows  

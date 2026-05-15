@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RasaKas - AI Mood & Money Companion",
+  title: "Boney.AI - AI Mood & Money Companion",
   description: "AI yang tahu kamu belanja karena lapar — atau karena luka.",
 };
 

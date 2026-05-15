@@ -1,7 +1,7 @@
-# RasaKas - Pitch Deck Outline (5 Slides)
+# Boney.AI - Pitch Deck Outline (5 Slides)
 
 **Format:** PDF  
-**File Name:** `OpenClaw2026_[NamaTim]_RasaKas.pdf`  
+**File Name:** `OpenClaw2026_[NamaTim]_Boney.AI.pdf`  
 **Design:** Clean, pastel colors matching brand (Pink #FFB5D8, Purple #D4BBFF, Mint #B5F5EC)
 
 ---
@@ -9,14 +9,14 @@
 ## Slide 1: Title & Team
 
 ### Layout
-- **Top:** RasaKas logo (💚) + tagline
+- **Top:** Boney.AI logo (💚) + tagline
 - **Center:** Team name + members
 - **Bottom:** OpenClaw Agenthon 2026 badge
 
 ### Content
 
 ```
-RasaKas
+Boney.AI
 AI yang tahu kamu belanja karena lapar — atau karena luka 💚
 
 [Nama Tim]
@@ -83,7 +83,7 @@ Tekanan finansial = pemicu utama masalah mental health
 ```
 THE SOLUTION
 
-RasaKas: Multi-Agent System untuk Mood & Money Tracking
+Boney.AI: Multi-Agent System untuk Mood & Money Tracking
 
 ┌─────────────────┬─────────────────┐
 │ Agent 1         │ Agent 2         │
@@ -249,7 +249,7 @@ IMPACT
 - [ ] No spelling/grammar errors
 - [ ] Team names and roles correct
 - [ ] GitHub/Devpost links included (if space)
-- [ ] File name: `OpenClaw2026_[NamaTim]_RasaKas.pdf`
+- [ ] File name: `OpenClaw2026_[NamaTim]_Boney.AI.pdf`
 - [ ] File size < 10MB
 
 ---

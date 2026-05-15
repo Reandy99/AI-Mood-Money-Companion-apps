@@ -1,4 +1,4 @@
-# RasaKas - Troubleshooting Guide
+# Boney.AI - Troubleshooting Guide
 
 Common issues and solutions for development, deployment, and demo.
 

@@ -1,4 +1,4 @@
-# RasaKas - Demo Video Script (2 Minutes)
+# Boney.AI - Demo Video Script (2 Minutes)
 
 **Target Duration:** 2:00 minutes  
 **Format:** Screen recording + voiceover  
@@ -22,7 +22,7 @@
 ### Scene 2: Solution Overview (0:20 - 0:35)
 **Visual:** Onboarding flow (3 steps)  
 **Voiceover:**
-> "RasaKas adalah AI Mood & Money Companion dengan 4 autonomous agents yang bekerja untuk kamu."
+> "Boney.AI adalah AI Mood & Money Companion dengan 4 autonomous agents yang bekerja untuk kamu."
 
 **Action:**
 - Click "Masuk dengan Google"
@@ -111,12 +111,12 @@
 ### Scene 8: Call to Action (1:55 - 2:00)
 **Visual:** Landing page or dashboard  
 **Voiceover:**
-> "RasaKas — AI yang memahami hubungan antara rasa dan kas kamu. OpenClaw Agenthon 2026."
+> "Boney.AI — AI yang memahami hubungan antara rasa dan kas kamu. OpenClaw Agenthon 2026."
 
 **Action:**
 - Show logo/branding
 - Display text:
-  - "RasaKas"
+  - "Boney.AI"
   - "OpenClaw Agenthon 2026"
   - "RISTEK x Build Club"
   - GitHub link
@@ -139,7 +139,7 @@
 ```
 57% Gen Z Indonesia bilang tekanan finansial adalah pemicu utama masalah mental health mereka. Tapi tidak ada tools yang menghubungkan mood harian dengan pengeluaran harian secara otomatis.
 
-RasaKas adalah AI Mood & Money Companion dengan 4 autonomous agents yang bekerja untuk kamu.
+Boney.AI adalah AI Mood & Money Companion dengan 4 autonomous agents yang bekerja untuk kamu.
 
 Setiap pagi, kamu check-in mood dalam 30 detik. Wajib, tapi bisa edit 2 kali per hari.
 
@@ -151,7 +151,7 @@ Agent 4, Boney, adalah AI companion yang paham konteks finansial dan emosional k
 
 4 agents, autonomous loop, tool calls ke Gmail API, Supabase, dan Claude API. Bukan chatbot biasa — ini multi-agent system dengan reasoning dan decision-making.
 
-RasaKas — AI yang memahami hubungan antara rasa dan kas kamu. OpenClaw Agenthon 2026.
+Boney.AI — AI yang memahami hubungan antara rasa dan kas kamu. OpenClaw Agenthon 2026.
 ```
 
 **Word Count:** ~150 words  
@@ -177,10 +177,10 @@ RasaKas — AI yang memahami hubungan antara rasa dan kas kamu. OpenClaw Agentho
 
 1. **Export video:** MP4 format, 1920x1080, 30fps
 2. **Upload to YouTube:**
-   - Title: `OpenClaw2026_[NamaTim]_RasaKas`
+   - Title: `OpenClaw2026_[NamaTim]_Boney.AI`
    - Description: Include GitHub link, tech stack, team info
    - Visibility: **Unlisted** (important!)
-   - Thumbnail: Custom thumbnail with RasaKas logo
+   - Thumbnail: Custom thumbnail with Boney.AI logo
 3. **Copy link** and add to Devpost submission
 
 ---

@@ -244,7 +244,7 @@ async function runAnthropicExpenseToolLoop(
       model: ANTHROPIC_MODEL,
       max_tokens: 2048,
       system:
-        'You are RasaKas expense-parser. You must finish by calling save_expense exactly once with your final structured parse.',
+        'You are Boney.AI expense-parser. You must finish by calling save_expense exactly once with your final structured parse.',
       tools: anthropicExpenseTools,
       tool_choice: { type: 'auto' },
       messages,
@@ -327,7 +327,7 @@ async function runDeepseekExpenseToolLoop(
     {
       role: 'system',
       content:
-        'You are RasaKas expense-parser. You must finish by calling save_expense exactly once with your final structured parse.',
+        'You are Boney.AI expense-parser. You must finish by calling save_expense exactly once with your final structured parse.',
     },
     { role: 'user', content: buildUserPrompt(emailData) },
   ]

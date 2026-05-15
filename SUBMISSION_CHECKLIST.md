@@ -1,4 +1,4 @@
-# RasaKas - Submission Checklist
+# Boney.AI - Submission Checklist
 
 **Deadline:** 15 Mei 2026, 23.00 WIB  
 **Platform:** Devpost ([openclawagenthon.devpost.com](https://openclawagenthon.devpost.com))
@@ -10,7 +10,7 @@
 ### 1. Code & Repository
 
 - [ ] **GitHub Repository Created**
-  - Repository name: `OpenClaw2026_[NamaTim]_RasaKas`
+  - Repository name: `OpenClaw2026_[NamaTim]_Boney.AI`
   - Visibility: **Public**
   - Created after: 15 Mei 2026, 09:45 WIB
   - First commit timestamp shows competition start time
@@ -137,7 +137,7 @@
   - Call to action (1:55-2:00)
 
 - [ ] **YouTube Upload**
-  - Title: `OpenClaw2026_[NamaTim]_RasaKas`
+  - Title: `OpenClaw2026_[NamaTim]_Boney.AI`
   - Description: Includes GitHub link, tech stack, team
   - Visibility: **Unlisted** (important!)
   - Custom thumbnail (optional but recommended)
@@ -147,7 +147,7 @@
 
 - [ ] **Deck Created**
   - Format: PDF
-  - File name: `OpenClaw2026_[NamaTim]_RasaKas.pdf`
+  - File name: `OpenClaw2026_[NamaTim]_Boney.AI.pdf`
   - Max 5 slides
   - File size < 10MB
 
@@ -168,13 +168,13 @@
 ### 6. Devpost Submission
 
 - [ ] **Project Information**
-  - Project name: RasaKas
+  - Project name: Boney.AI
   - Tagline: "AI yang tahu kamu belanja karena lapar — atau karena luka"
   - Description: Comprehensive (problem, solution, tech stack, features)
   - Built with: Next.js, Supabase, Claude API, Gmail API, Vercel
 
 - [ ] **Links**
-  - GitHub repository: `https://github.com/[username]/OpenClaw2026_[NamaTim]_RasaKas`
+  - GitHub repository: `https://github.com/[username]/OpenClaw2026_[NamaTim]_Boney.AI`
   - Live deployment: `https://your-domain.vercel.app`
   - Demo video: YouTube Unlisted link
 

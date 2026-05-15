@@ -1,4 +1,4 @@
-# RasaKas - Project Status
+# Boney.AI - Project Status
 
 **Last Updated:** 2026-05-15  
 **Status:** ✅ Ready for Demo & Submission  
@@ -103,7 +103,7 @@
    - Follow `PITCH_DECK.md` outline
    - Design 5 slides
    - Export to PDF
-   - File name: `OpenClaw2026_[NamaTim]_RasaKas.pdf`
+   - File name: `OpenClaw2026_[NamaTim]_Boney.AI.pdf`
 
 7. **Deploy to Vercel** (30 minutes)
    - Push to GitHub
@@ -297,7 +297,7 @@ rasakas/
 ### Common Judge Questions
 
 **Q: "Ini cuma chatbot biasa?"**
-A: "Bukan! RasaKas punya 4 autonomous agents yang bekerja tanpa intervensi manual. Agent 1 scan email setiap malam, Agent 2 parse dengan AI, Agent 3 analisis korelasi setiap minggu, Agent 4 proactive kirim notifikasi kalau detect anomaly."
+A: "Bukan! Boney.AI punya 4 autonomous agents yang bekerja tanpa intervensi manual. Agent 1 scan email setiap malam, Agent 2 parse dengan AI, Agent 3 analisis korelasi setiap minggu, Agent 4 proactive kirim notifikasi kalau detect anomaly."
 
 **Q: "Gimana autonomous loop-nya?"**
 A: "Kami pakai Vercel Cron untuk trigger Agent 1 (daily 22:00) dan Agent 3 (weekly Monday 08:00). Agent 2 triggered by Agent 1 (event-driven). Agent 4 continuously monitor untuk anomaly detection."

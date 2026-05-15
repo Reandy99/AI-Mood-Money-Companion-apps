@@ -6,7 +6,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ---
 
-# RasaKas — Agent & AI Coding Rules
+# Boney.AI — Agent & AI Coding Rules
 
 ## Supabase Client Selection (Critical)
 
@@ -24,7 +24,7 @@ There are **three separate Supabase clients** — using the wrong one causes sil
 
 ## Multi-Agent Architecture — Respect Boundaries
 
-RasaKas has 4 agents. Each has a single responsibility — do not mix them:
+Boney.AI has 4 agents. Each has a single responsibility — do not mix them:
 
 | Agent | File | Responsibility |
 |-------|------|----------------|

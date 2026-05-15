@@ -160,7 +160,7 @@ async function generateNotificationText(data: {
     .map(e => `${getCategoryEmoji(e.category)} ${e.merchant} — Rp ${e.amount.toLocaleString('id-ID')}`)
     .join('\n')
 
-  const prompt = `Kamu adalah Boney, AI companion dari RasaKas. Buatkan teks notifikasi harian untuk user.
+  const prompt = `Kamu adalah Boney, AI companion dari Boney.AI. Buatkan teks notifikasi harian untuk user.
 
 DATA HARI INI:
 - Tanggal: ${today}

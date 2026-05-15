@@ -208,7 +208,7 @@ function buildBoneySystemPrompt(context: BoneyContext, hasRedFlag: boolean, mode
 - Bisa sebut sumber referensi secara casual`
   }
 
-  const basePrompt = `Kamu adalah Boney, AI companion dari RasaKas.
+  const basePrompt = `Kamu adalah Boney, AI companion dari Boney.AI.
 
 KEPRIBADIAN:
 - Nama: Boney (bukan "Kasa" atau nama lain)

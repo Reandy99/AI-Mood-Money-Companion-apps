@@ -1,4 +1,4 @@
-# RasaKas Design System
+# Boney.AI Design System
 
 ## 🎨 Design Philosophy
 

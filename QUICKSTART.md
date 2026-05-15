@@ -1,4 +1,4 @@
-# RasaKas - Quick Start Guide
+# Boney.AI - Quick Start Guide
 
 **Untuk Hackathon OpenClaw Agenthon 2026**
 
@@ -101,7 +101,7 @@ curl -X POST http://localhost:3000/api/agents/weekly-report \
 ### Step 1: Google Cloud Console
 
 1. Buka [console.cloud.google.com](https://console.cloud.google.com)
-2. Create project baru: "RasaKas"
+2. Create project baru: "Boney.AI"
 3. Enable **Gmail API**:
    - APIs & Services → Library
    - Search "Gmail API" → Enable
@@ -111,7 +111,7 @@ curl -X POST http://localhost:3000/api/agents/weekly-report \
 1. APIs & Services → Credentials
 2. Create Credentials → OAuth client ID
 3. Application type: **Web application**
-4. Name: "RasaKas Local Dev"
+4. Name: "Boney.AI Local Dev"
 5. Authorized redirect URIs:
    - `http://localhost:3000/api/auth/google`
 6. **Copy Client ID & Client Secret**
@@ -183,7 +183,7 @@ const { data: logs } = await supabase
 1. Export as MP4
 2. Upload to YouTube
 3. Visibility: **Unlisted** (penting!)
-4. Title: `OpenClaw2026_[NamaTim]_RasaKas`
+4. Title: `OpenClaw2026_[NamaTim]_Boney.AI`
 5. Copy link untuk Devpost
 
 ---
@@ -209,7 +209,7 @@ Use `PITCH_DECK.md` as outline:
 ### Export
 
 - Format: **PDF**
-- File name: `OpenClaw2026_[NamaTim]_RasaKas.pdf`
+- File name: `OpenClaw2026_[NamaTim]_Boney.AI.pdf`
 - Max 5 slides
 - File size < 10MB
 
@@ -223,9 +223,9 @@ Use `PITCH_DECK.md` as outline:
 ```bash
 git init
 git add .
-git commit -m "Initial commit - RasaKas"
+git commit -m "Initial commit - Boney.AI"
 git branch -M main
-git remote add origin https://github.com/[username]/OpenClaw2026_[NamaTim]_RasaKas
+git remote add origin https://github.com/[username]/OpenClaw2026_[NamaTim]_Boney.AI
 git push -u origin main
 ```
 
