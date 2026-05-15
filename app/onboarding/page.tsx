@@ -26,19 +26,19 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-6 md:p-10 relative overflow-hidden">
       {/* Background Blobs */}
       <div className="absolute top-10 right-10 w-96 h-96 bg-gradient-mint rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-peach rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape" style={{ animationDelay: '2s' }}></div>
 
-      <div className="max-w-2xl w-full relative z-10">
+      <div className="max-w-3xl w-full relative z-10">
         {/* Progress Indicator */}
-        <div className="flex justify-center gap-2 mb-8">
+        <div className="flex justify-center gap-3 mb-10">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className={`h-2 rounded-full transition-all ${
-                i === step ? 'w-12 bg-[#FF6B9D]' : 'w-2 bg-[#E2E8F0]'
+              className={`h-3 rounded-full transition-all ${
+                i === step ? 'w-16 bg-[#FF6B9D]' : 'w-3 bg-[#E2E8F0]'
               }`}
             />
           ))}
@@ -46,17 +46,17 @@ export default function OnboardingPage() {
 
         {/* Step 1: Welcome */}
         {step === 1 && (
-          <div className="bento-card p-8 md:p-12 text-center animate-fade-in-up">
-            <div className="text-7xl mb-6 animate-bouncy">💚</div>
-            <h1 className="text-4xl md:text-5xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-4">
+          <div className="bento-card p-12 md:p-16 text-center animate-fade-in-up">
+            <div className="text-8xl md:text-9xl mb-8 animate-bouncy">💚</div>
+            <h1 className="text-5xl md:text-6xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-6">
               Selamat Datang di RasaKas!
             </h1>
-            <p className="text-lg text-[#718096] font-medium mb-8 max-w-lg mx-auto">
+            <p className="text-xl md:text-2xl text-[#718096] font-medium mb-10 max-w-2xl mx-auto">
               AI companion yang membantu kamu memahami hubungan antara mood dan pengeluaran harian.
             </p>
             <button
               onClick={() => setStep(2)}
-              className="px-8 py-4 bg-gradient-to-r from-[#FF6B9D] to-[#D4BBFF] text-white font-bold rounded-2xl hover:scale-105 transition-transform shadow-lg"
+              className="px-12 py-5 bg-gradient-to-r from-[#FF6B9D] to-[#D4BBFF] text-white text-xl font-bold rounded-2xl hover:scale-105 transition-transform shadow-lg"
             >
               Mulai Sekarang
             </button>
@@ -65,12 +65,12 @@ export default function OnboardingPage() {
 
         {/* Step 2: Connect Gmail */}
         {step === 2 && (
-          <div className="bento-card p-8 md:p-12 animate-fade-in-up">
-            <div className="text-6xl mb-6 text-center">📧</div>
-            <h2 className="text-3xl md:text-4xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-4 text-center">
+          <div className="bento-card p-12 md:p-16 animate-fade-in-up">
+            <div className="text-7xl md:text-8xl mb-8 text-center">📧</div>
+            <h2 className="text-4xl md:text-5xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-6 text-center">
               Hubungkan Gmail
             </h2>
-            <p className="text-lg text-[#718096] font-medium mb-6 text-center max-w-lg mx-auto">
+            <p className="text-xl md:text-2xl text-[#718096] font-medium mb-8 text-center max-w-2xl mx-auto">
               Kami akan scan email dari bank kamu setiap malam untuk tracking pengeluaran otomatis.
             </p>
             
@@ -114,12 +114,12 @@ export default function OnboardingPage() {
 
         {/* Step 3: How It Works */}
         {step === 3 && (
-          <div className="bento-card p-8 md:p-12 animate-fade-in-up">
-            <div className="text-6xl mb-6 text-center">🤖</div>
-            <h2 className="text-3xl md:text-4xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-4 text-center">
+          <div className="bento-card p-12 md:p-16 animate-fade-in-up">
+            <div className="text-7xl md:text-8xl mb-8 text-center">🤖</div>
+            <h2 className="text-4xl md:text-5xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-6 text-center">
               Cara Kerja RasaKas
             </h2>
-            <p className="text-lg text-[#718096] font-medium mb-8 text-center max-w-lg mx-auto">
+            <p className="text-xl md:text-2xl text-[#718096] font-medium mb-10 text-center max-w-2xl mx-auto">
               4 AI agents bekerja otomatis untuk kamu
             </p>
 

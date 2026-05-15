@@ -81,48 +81,68 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8 relative overflow-hidden">
+    <div className="min-h-screen p-6 md:p-10 relative overflow-hidden">
       {/* Background Blobs */}
       <div className="absolute top-10 right-10 w-96 h-96 bg-gradient-mint rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-peach rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape" style={{ animationDelay: '2s' }}></div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
-        <div className="mb-8 animate-fade-in-up">
+        <div className="mb-10 animate-fade-in-up">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-[#718096] hover:text-[#2D3748] mb-4 transition-colors"
+            className="flex items-center gap-2 text-[#718096] hover:text-[#2D3748] mb-6 transition-colors text-lg"
           >
-            <span>←</span>
+            <span className="text-3xl">←</span>
             <span className="font-medium">Kembali</span>
           </button>
-          <h1 className="text-4xl md:text-5xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-2">
+          <h1 className="text-5xl md:text-6xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-3">
             Pengaturan
           </h1>
-          <p className="text-lg text-[#718096] font-medium">
+          <p className="text-xl text-[#718096] font-medium">
             Kelola akun dan koneksi kamu
           </p>
         </div>
 
-        {/* Profile Section */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-1 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
-          <h2 className="text-xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-4">
-            Profil
-          </h2>
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#FF6B9D] to-[#D4BBFF] flex items-center justify-center text-3xl text-white font-bold">
-              {user?.name?.[0]?.toUpperCase() || '?'}
+        {/* Two Column Layout for Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {/* Profile Section */}
+          <div className="bento-card p-8 animate-fade-in-up stagger-1 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
+            <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-6">
+              Profil
+            </h2>
+            <div className="flex items-center gap-5">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FF6B9D] to-[#D4BBFF] flex items-center justify-center text-4xl text-white font-bold">
+                {user?.name?.[0]?.toUpperCase() || '?'}
+              </div>
+              <div>
+                <p className="font-bold text-[#2D3748] text-lg">{user?.name || 'User'}</p>
+                <p className="text-base text-[#718096]">{user?.email}</p>
+              </div>
             </div>
-            <div>
-              <p className="font-bold text-[#2D3748]">{user?.name || 'User'}</p>
-              <p className="text-sm text-[#718096]">{user?.email}</p>
+          </div>
+
+          {/* About */}
+          <div className="bento-card p-8 animate-fade-in-up stagger-2 hover:rotate-0" style={{ transform: 'rotate(0.5deg)' }}>
+            <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-6">
+              Tentang RasaKas
+            </h2>
+            <div className="space-y-3 text-base text-[#718096]">
+              <p><span className="font-bold text-[#2D3748]">Versi:</span> 1.0.0</p>
+              <p><span className="font-bold text-[#2D3748]">Build:</span> OpenClaw Agenthon 2026</p>
+              <p><span className="font-bold text-[#2D3748]">AI Model:</span> Claude Sonnet 4</p>
+            </div>
+            <div className="mt-5 pt-5 border-t border-[#E2E8F0]">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-[#FF6B9D] hover:underline text-base font-medium">
+                GitHub Repository →
+              </a>
             </div>
           </div>
         </div>
 
         {/* Gmail Connection */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-2 hover:rotate-0" style={{ transform: 'rotate(0.5deg)' }}>
-          <h2 className="text-xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-4">
+        <div className="bento-card p-8 mb-6 animate-fade-in-up stagger-3 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
+          <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-6">
             Koneksi Gmail
           </h2>
           
@@ -196,16 +216,16 @@ export default function SettingsPage() {
         </div>
 
         {/* Notifications */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-3 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
-          <h2 className="text-xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-4">
+        <div className="bento-card p-8 mb-6 animate-fade-in-up stagger-4 hover:rotate-0" style={{ transform: 'rotate(0.5deg)' }}>
+          <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-6">
             Notifikasi
           </h2>
           
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-bold text-[#2D3748]">Reminder Check-in Mood</p>
-                <p className="text-sm text-[#718096]">Setiap pagi jam 07.00</p>
+                <p className="font-bold text-[#2D3748] text-lg">Reminder Check-in Mood</p>
+                <p className="text-base text-[#718096]">Setiap pagi jam 07.00</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" className="sr-only peer" defaultChecked />
@@ -215,8 +235,8 @@ export default function SettingsPage() {
 
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-bold text-[#2D3748]">Weekly Report</p>
-                <p className="text-sm text-[#718096]">Setiap Senin jam 08.00</p>
+                <p className="font-bold text-[#2D3748] text-lg">Weekly Report</p>
+                <p className="text-base text-[#718096]">Setiap Senin jam 08.00</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" className="sr-only peer" defaultChecked />
@@ -226,42 +246,25 @@ export default function SettingsPage() {
 
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-bold text-[#2D3748]">Boney Proactive Check-in</p>
-                <p className="text-sm text-[#718096]">Saat detect anomaly spending</p>
+                <p className="font-bold text-[#2D3748] text-lg">Boney Proactive Check-in</p>
+                <p className="text-base text-[#718096]">Saat detect anomaly spending</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" className="sr-only peer" defaultChecked />
                 <div className="w-11 h-6 bg-[#E2E8F0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-[#FF6B9D] peer-checked:to-[#D4BBFF]"></div>
               </label>
             </div>
-          </div>
-        </div>
-
-        {/* About */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-4 hover:rotate-0" style={{ transform: 'rotate(0.5deg)' }}>
-          <h2 className="text-xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-4">
-            Tentang RasaKas
-          </h2>
-          <div className="space-y-2 text-sm text-[#718096]">
-            <p><span className="font-bold text-[#2D3748]">Versi:</span> 1.0.0</p>
-            <p><span className="font-bold text-[#2D3748]">Build:</span> OpenClaw Agenthon 2026</p>
-            <p><span className="font-bold text-[#2D3748]">AI Model:</span> Claude Sonnet 4</p>
-          </div>
-          <div className="mt-4 pt-4 border-t border-[#E2E8F0]">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-[#FF6B9D] hover:underline text-sm font-medium">
-              GitHub Repository →
-            </a>
           </div>
         </div>
 
         {/* Danger Zone */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-5 border-2 border-[#FF6B6B]/30 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
-          <h2 className="text-xl font-[var(--font-outfit)] font-bold text-[#FF6B6B] mb-4">
+        <div className="bento-card p-8 mb-6 animate-fade-in-up stagger-5 border-2 border-[#FF6B6B]/30 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
+          <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#FF6B6B] mb-6">
             Danger Zone
           </h2>
           <button
             onClick={handleLogout}
-            className="px-6 py-3 bg-[#FF6B6B] text-white font-bold rounded-xl hover:bg-[#FF5252] transition-colors"
+            className="px-8 py-4 bg-[#FF6B6B] text-white font-bold text-lg rounded-xl hover:bg-[#FF5252] transition-colors"
           >
             Logout
           </button>

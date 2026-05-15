@@ -106,56 +106,56 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
   )
 
   return (
-    <div className="min-h-screen p-4 md:p-8 relative overflow-hidden">
+    <div className="min-h-screen p-6 md:p-10 relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-10 right-10 w-96 h-96 bg-gradient-peach rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-lavender rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape" style={{ animationDelay: '2s' }}></div>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="mb-8 animate-fade-in-up">
-          <a href="/dashboard" className="inline-flex items-center gap-2 text-[#718096] hover:text-[#2D3748] mb-4 font-medium">
-            <span className="text-2xl">←</span>
+        <div className="mb-10 animate-fade-in-up">
+          <a href="/dashboard" className="inline-flex items-center gap-2 text-[#718096] hover:text-[#2D3748] mb-6 font-medium text-lg">
+            <span className="text-3xl">←</span>
             <span>Kembali</span>
           </a>
-          <h1 className="text-4xl md:text-5xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-2">
+          <h1 className="text-5xl md:text-6xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-3">
             Weekly Report 📊
           </h1>
-          <p className="text-lg text-[#718096] font-medium">
+          <p className="text-xl text-[#718096] font-medium">
             {new Date(report.week_start).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })} - {new Date(report.week_end).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bento-card p-6 bg-gradient-to-br from-[#FFB5D8]/30 to-[#E4C1F9]/30 animate-fade-in-up stagger-1 hover:rotate-0" style={{ transform: 'rotate(-1deg)' }}>
-            <p className="text-sm text-[#718096] font-medium mb-1">Total Pengeluaran</p>
-            <p className="text-4xl font-[var(--font-mono)] font-bold text-[#2D3748]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="bento-card p-8 bg-gradient-to-br from-[#FFB5D8]/30 to-[#E4C1F9]/30 animate-fade-in-up stagger-1 hover:rotate-0" style={{ transform: 'rotate(-1deg)' }}>
+            <p className="text-base text-[#718096] font-medium mb-2">Total Pengeluaran</p>
+            <p className="text-5xl font-[var(--font-mono)] font-bold text-[#2D3748]">
               Rp {(report.total_expense / 1000).toFixed(0)}k
             </p>
           </div>
 
-          <div className="bento-card p-6 bg-gradient-to-br from-[#FFF4B8]/30 to-[#FFCDB2]/30 animate-fade-in-up stagger-2 hover:rotate-0" style={{ transform: 'rotate(1deg)' }}>
-            <p className="text-sm text-[#718096] font-medium mb-1">Mood Dominan</p>
-            <p className="text-4xl font-[var(--font-outfit)] font-bold text-[#2D3748]">
+          <div className="bento-card p-8 bg-gradient-to-br from-[#FFF4B8]/30 to-[#FFCDB2]/30 animate-fade-in-up stagger-2 hover:rotate-0" style={{ transform: 'rotate(1deg)' }}>
+            <p className="text-base text-[#718096] font-medium mb-2">Mood Dominan</p>
+            <p className="text-5xl font-[var(--font-outfit)] font-bold text-[#2D3748]">
               {report.dominant_mood}
             </p>
           </div>
 
-          <div className="bento-card p-6 bg-gradient-to-br from-[#B5F5EC]/30 to-[#B8E0FF]/30 animate-fade-in-up stagger-3 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
-            <p className="text-sm text-[#718096] font-medium mb-1">Kategori Tertinggi</p>
-            <p className="text-4xl font-[var(--font-outfit)] font-bold text-[#2D3748]">
+          <div className="bento-card p-8 bg-gradient-to-br from-[#B5F5EC]/30 to-[#B8E0FF]/30 animate-fade-in-up stagger-3 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
+            <p className="text-base text-[#718096] font-medium mb-2">Kategori Tertinggi</p>
+            <p className="text-5xl font-[var(--font-outfit)] font-bold text-[#2D3748]">
               {report.top_category}
             </p>
           </div>
         </div>
 
         {/* Mood Chart */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-4">
-          <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-4">
+        <div className="bento-card p-8 mb-8 animate-fade-in-up stagger-4">
+          <h2 className="text-3xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-6">
             Mood 7 Hari
           </h2>
-          <div className="flex gap-2 overflow-x-auto pb-2">
+          <div className="flex gap-4 overflow-x-auto pb-2">
             {report.mood_expense_correlation.moods.map((mood, index) => {
               const moodType = Object.entries(MOOD_CONFIG).find(
                 ([, config]) => config.label === mood.mood
@@ -166,14 +166,14 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
               return (
                 <div
                   key={index}
-                  className="flex-shrink-0 bento-card p-4 text-center min-w-[100px]"
+                  className="flex-shrink-0 bento-card p-6 text-center min-w-[140px]"
                   style={{ backgroundColor: config ? `${config.color}40` : '#E0E7FF40' }}
                 >
-                  <div className="text-4xl mb-2">{config?.emoji || '😐'}</div>
-                  <p className="text-xs text-[#718096] font-bold mb-1">
+                  <div className="text-5xl mb-3">{config?.emoji || '😐'}</div>
+                  <p className="text-sm text-[#718096] font-bold mb-1">
                     {date.toLocaleDateString('id-ID', { weekday: 'short' })}
                   </p>
-                  <p className="text-xs text-[#718096] font-medium">
+                  <p className="text-sm text-[#718096] font-medium">
                     {mood.mood}
                   </p>
                 </div>
@@ -183,18 +183,18 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
         </div>
 
         {/* Expense Chart */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-5">
-          <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-4">
+        <div className="bento-card p-8 mb-8 animate-fade-in-up stagger-5">
+          <h2 className="text-3xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-6">
             Pengeluaran Harian
           </h2>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {report.mood_expense_correlation.expenses.map((expense, index) => {
               const date = new Date(expense.date)
               const percentage = (expense.amount / maxExpense) * 100
               
               return (
-                <div key={index} className="space-y-1">
-                  <div className="flex justify-between text-sm">
+                <div key={index} className="space-y-2">
+                  <div className="flex justify-between text-base">
                     <span className="font-medium text-[#718096]">
                       {date.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short' })}
                     </span>
@@ -202,12 +202,12 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
                       Rp {(expense.amount / 1000).toFixed(0)}k
                     </span>
                   </div>
-                  <div className="h-8 bg-white/50 rounded-full overflow-hidden">
+                  <div className="h-10 bg-white/50 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[#FFB5D8] to-[#E4C1F9] rounded-full transition-all duration-500 flex items-center justify-end pr-3"
+                      className="h-full bg-gradient-to-r from-[#FFB5D8] to-[#E4C1F9] rounded-full transition-all duration-500 flex items-center justify-end pr-4"
                       style={{ width: `${percentage}%` }}
                     >
-                      <span className="text-xs font-bold text-white">
+                      <span className="text-sm font-bold text-white">
                         {expense.category}
                       </span>
                     </div>
@@ -238,10 +238,30 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
           </div>
         </div>
 
+        {/* AI Insight */}
+        <div className="bento-card p-10 bg-gradient-to-br from-[#E4C1F9]/20 to-[#D4BBFF]/20 mb-8 animate-fade-in-up stagger-6 hover:rotate-0" style={{ transform: 'rotate(-0.5deg)' }}>
+          <div className="flex items-start gap-5 mb-6">
+            <div className="text-6xl animate-bouncy">💡</div>
+            <div>
+              <h2 className="text-3xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-2">
+                Insight dari Boney
+              </h2>
+              <p className="text-base text-[#718096] font-medium">
+                Analisis AI tentang pola mood & pengeluaran kamu
+              </p>
+            </div>
+          </div>
+          <div className="prose prose-lg max-w-none">
+            <p className="text-[#2D3748] text-lg leading-relaxed whitespace-pre-line">
+              {report.insight_text}
+            </p>
+          </div>
+        </div>
+
         {/* CTA */}
-        <div className="mt-8 text-center animate-fade-in-up stagger-7">
-          <a href="/chat" className="btn-pastel inline-flex items-center gap-2">
-            <span className="text-2xl">💬</span>
+        <div className="mt-10 text-center animate-fade-in-up stagger-7">
+          <a href="/chat" className="btn-pastel inline-flex items-center gap-3 text-lg">
+            <span className="text-3xl">💬</span>
             <span className="font-black">Chat dengan Boney</span>
           </a>
         </div>

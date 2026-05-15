@@ -141,18 +141,18 @@ export default function ChatPage() {
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-lavender rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob blob-shape" style={{ animationDelay: '2s' }}></div>
 
       {/* Header */}
-      <div className="relative z-10 p-4 md:p-6 border-b-2 border-white/30 backdrop-blur-sm bg-white/50">
-        <div className="max-w-4xl mx-auto flex items-center gap-4">
-          <a href="/dashboard" className="text-3xl hover:scale-110 transition-transform">
+      <div className="relative z-10 p-6 md:p-8 border-b-2 border-white/30 backdrop-blur-sm bg-white/50">
+        <div className="max-w-5xl mx-auto flex items-center gap-4">
+          <a href="/dashboard" className="text-3xl md:text-4xl hover:scale-110 transition-transform">
             ←
           </a>
-          <div className="flex items-center gap-3">
-            <div className="text-4xl animate-bouncy">💬</div>
+          <div className="flex items-center gap-4">
+            <div className="text-5xl md:text-6xl animate-bouncy">💬</div>
             <div>
-              <h1 className="text-2xl font-[var(--font-outfit)] font-black text-[#2D3748]">
+              <h1 className="text-3xl md:text-4xl font-[var(--font-outfit)] font-black text-[#2D3748]">
                 Chat dengan Boney
               </h1>
-              <p className="text-sm text-[#718096] font-medium">
+              <p className="text-base md:text-lg text-[#718096] font-medium">
                 AI companion yang memahami kamu
               </p>
             </div>
@@ -161,8 +161,8 @@ export default function ChatPage() {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-6 relative z-10">
-        <div className="max-w-4xl mx-auto space-y-4">
+      <div className="flex-1 overflow-y-auto p-6 md:p-8 relative z-10">
+        <div className="max-w-5xl mx-auto space-y-6">
           {messages.map((message, index) => (
             <div
               key={message.id}
@@ -171,7 +171,7 @@ export default function ChatPage() {
             >
               <div
                 className={`
-                  max-w-[80%] md:max-w-[70%] p-4 rounded-3xl
+                  max-w-[85%] md:max-w-[65%] p-5 md:p-6 rounded-3xl
                   ${message.role === 'user' 
                     ? 'bg-gradient-to-br from-[#FFB5D8]/80 to-[#E4C1F9]/80 ml-auto' 
                     : 'bento-card bg-white/80'
@@ -179,14 +179,14 @@ export default function ChatPage() {
                 `}
               >
                 {message.role === 'assistant' && (
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">💚</span>
-                    <span className="font-[var(--font-outfit)] font-bold text-[#2D3748] text-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-3xl">💚</span>
+                    <span className="font-[var(--font-outfit)] font-bold text-[#2D3748] text-base">
                       Boney
                     </span>
                   </div>
                 )}
-                <p className="text-[#2D3748] leading-relaxed whitespace-pre-wrap">
+                <p className="text-[#2D3748] text-base md:text-lg leading-relaxed whitespace-pre-wrap">
                   {message.content}
                 </p>
               </div>
@@ -210,46 +210,46 @@ export default function ChatPage() {
       </div>
 
       {/* Input */}
-      <div className="relative z-10 p-4 md:p-6 border-t-2 border-white/30 backdrop-blur-sm bg-white/50">
-        <div className="max-w-4xl mx-auto">
-          <form onSubmit={handleSubmit} className="flex gap-3">
+      <div className="relative z-10 p-6 md:p-8 border-t-2 border-white/30 backdrop-blur-sm bg-white/50">
+        <div className="max-w-5xl mx-auto">
+          <form onSubmit={handleSubmit} className="flex gap-4">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ketik pesan kamu..."
               disabled={isLoading}
-              className="flex-1 p-4 rounded-2xl border-2 border-[#E0E7FF] focus:border-[#D4BBFF] focus:outline-none bg-white/80 text-[#2D3748] font-medium disabled:opacity-50"
+              className="flex-1 p-5 md:p-6 rounded-2xl border-2 border-[#E0E7FF] focus:border-[#D4BBFF] focus:outline-none bg-white/80 text-[#2D3748] text-base md:text-lg font-medium disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="btn-pastel px-8 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-pastel px-10 md:px-12 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="font-black">Kirim</span>
+              <span className="font-black text-lg">Kirim</span>
             </button>
           </form>
           
           {/* Quick replies */}
-          <div className="flex gap-2 mt-3 flex-wrap">
+          <div className="flex gap-3 mt-4 flex-wrap">
             <button
               onClick={() => setInput('Lagi stres kerja nih')}
               disabled={isLoading}
-              className="text-sm px-4 py-2 rounded-full bg-white/60 hover:bg-white/80 text-[#718096] font-medium transition-colors disabled:opacity-50"
+              className="text-sm md:text-base px-5 py-3 rounded-full bg-white/60 hover:bg-white/80 text-[#718096] font-medium transition-colors disabled:opacity-50"
             >
               Lagi stres kerja
             </button>
             <button
               onClick={() => setInput('Masalah keuangan')}
               disabled={isLoading}
-              className="text-sm px-4 py-2 rounded-full bg-white/60 hover:bg-white/80 text-[#718096] font-medium transition-colors disabled:opacity-50"
+              className="text-sm md:text-base px-5 py-3 rounded-full bg-white/60 hover:bg-white/80 text-[#718096] font-medium transition-colors disabled:opacity-50"
             >
               Masalah keuangan
             </button>
             <button
               onClick={() => setInput('Cerita aja')}
               disabled={isLoading}
-              className="text-sm px-4 py-2 rounded-full bg-white/60 hover:bg-white/80 text-[#718096] font-medium transition-colors disabled:opacity-50"
+              className="text-sm md:text-base px-5 py-3 rounded-full bg-white/60 hover:bg-white/80 text-[#718096] font-medium transition-colors disabled:opacity-50"
             >
               Cerita aja
             </button>
