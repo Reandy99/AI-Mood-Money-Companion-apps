@@ -19,7 +19,7 @@ export default function SettingsPage() {
     // Check if Gmail is connected
     setTimeout(() => {
       setUser({
-        email: 'demo@rasakas.app',
+        email: 'demo@boney.ai',
         name: 'Demo User',
         avatar_url: null
       })
@@ -125,7 +125,7 @@ export default function SettingsPage() {
           {/* About */}
           <div className="bento-card p-8 animate-fade-in-up stagger-2 hover:rotate-0" style={{ transform: 'rotate(0.5deg)' }}>
             <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-6">
-              Tentang RasaKas
+              Tentang Boney.AI
             </h2>
             <div className="space-y-3 text-base text-[#718096]">
               <p><span className="font-bold text-[#2D3748]">Versi:</span> 1.0.0</p>

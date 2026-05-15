@@ -49,7 +49,7 @@ export default function OnboardingPage() {
           <div className="bento-card p-12 md:p-16 text-center animate-fade-in-up">
             <div className="text-8xl md:text-9xl mb-8 animate-bouncy">💚</div>
             <h1 className="text-5xl md:text-6xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-6">
-              Selamat Datang di RasaKas!
+              Selamat Datang di Boney.AI!
             </h1>
             <p className="text-xl md:text-2xl text-[#718096] font-medium mb-10 max-w-2xl mx-auto">
               AI companion yang membantu kamu memahami hubungan antara mood dan pengeluaran harian.
@@ -117,7 +117,7 @@ export default function OnboardingPage() {
           <div className="bento-card p-12 md:p-16 animate-fade-in-up">
             <div className="text-7xl md:text-8xl mb-8 text-center">🤖</div>
             <h2 className="text-4xl md:text-5xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-6 text-center">
-              Cara Kerja RasaKas
+              Cara Kerja Boney.AI
             </h2>
             <p className="text-xl md:text-2xl text-[#718096] font-medium mb-10 text-center max-w-2xl mx-auto">
               4 AI agents bekerja otomatis untuk kamu

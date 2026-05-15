@@ -37,7 +37,7 @@ export default function LandingPage() {
             <div className="absolute -right-2 -top-2 text-2xl motion-safe:animate-bouncy">✨</div>
           </div>
           <h1 className="mb-4 font-[var(--font-outfit)] text-5xl font-black leading-[1.08] tracking-tight gradient-text-pastel md:text-6xl lg:text-7xl">
-            RasaKas
+            Boney.AI
           </h1>
           <p className="mx-auto max-w-3xl text-base font-semibold leading-snug text-rk-muted md:text-xl md:leading-snug">
             AI yang tahu kamu belanja karena{" "}
@@ -193,24 +193,6 @@ export default function LandingPage() {
             </p>
           </div>
         </Card>
-
-        <div className="mt-8 space-y-3 text-center motion-safe:animate-fade-in-up stagger-4">
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <div className="h-3 w-3 animate-pulse rounded-full bg-gradient-pink" />
-            <span className="text-base font-bold text-rk-muted">OpenClaw Agenthon 2026</span>
-            <div
-              className="h-3 w-3 animate-pulse rounded-full bg-gradient-cool"
-              style={{ animationDelay: "0.5s" }}
-            />
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <span className="text-xl motion-safe:animate-bouncy">🏆</span>
-            <p className="text-sm font-semibold text-rk-muted">RISTEK x Build Club</p>
-            <span className="text-xl motion-safe:animate-bouncy" style={{ animationDelay: "0.3s" }}>
-              ✨
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   );

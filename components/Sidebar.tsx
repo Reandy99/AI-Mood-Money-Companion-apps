@@ -30,7 +30,7 @@ export default function Sidebar() {
             <div className="text-5xl animate-bouncy">💚</div>
             <div>
               <h1 className="text-2xl font-[var(--font-outfit)] font-black gradient-text-pastel">
-                RasaKas
+                Boney.AI
               </h1>
               <p className="text-xs text-[#6B7280] font-medium">AI Mood & Money</p>
             </div>
@@ -68,7 +68,7 @@ export default function Sidebar() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-bold text-[#1F2937] text-sm truncate">Demo User</p>
-              <p className="text-xs text-[#6B7280] truncate">demo@rasakas.app</p>
+              <p className="text-xs text-[#6B7280] truncate">demo@boney.ai</p>
             </div>
           </div>
         </div>

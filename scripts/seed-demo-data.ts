@@ -11,7 +11,7 @@ async function seedDemoData() {
 
   // Create demo user
   const demoUser = {
-    email: 'demo@rasakas.app',
+    email: 'demo@boney.ai',
     name: 'Demo User',
     onboarded_at: new Date().toISOString()
   }
