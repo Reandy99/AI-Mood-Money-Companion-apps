@@ -2,8 +2,6 @@
 
 > AI yang tahu kamu belanja karena lapar — atau karena luka.
 
-**OpenClaw Agenthon 2026** | RISTEK x Build Club
-
 ---
 
 ## Problem
@@ -183,7 +181,7 @@ Cron endpoints diproteksi via `Authorization: Bearer <CRON_SECRET>`.
 | `expense_logs` | Transaksi hasil parse email; `source_email_id` untuk dedup |
 | `weekly_reports` | Laporan korelasi mood vs pengeluaran mingguan |
 | `chat_history` | Riwayat percakapan dengan Boney |
-| `agent_logs` | Audit trail semua agent runs (untuk juri) |
+| `agent_logs` | Audit trail semua agent runs |
 
 ---
 
@@ -195,14 +193,6 @@ Cron endpoints diproteksi via `Authorization: Bearer <CRON_SECRET>`.
 - **Weekly Correlation Report** — AI-generated insight korelasi mood vs pengeluaran
 - **Boney AI Companion** — context-aware chat, proactive anomaly intervention, red flag detection
 
-## OpenClaw Agenthon Compliance
-
-- **Tool Call Capability:** Gmail API, Supabase queries, Claude API
-- **Autonomous Loop:** Vercel Cron (22.00 daily, Senin 08.00) + event-driven
-- **Multi-Agent System:** 4 agents dengan orchestration
-- **Reasoning & Decision-Making:** Pattern analysis, categorization, emotional intelligence
-- **Bukan Chatbot Biasa:** Boney = proactive + context-aware + tool orchestration
-
 ## AI Models Used
 
 - **claude-sonnet-4** (Anthropic) — Expense parsing, pattern analysis, Boney companion
@@ -210,4 +200,4 @@ Cron endpoints diproteksi via `Authorization: Bearer <CRON_SECRET>`.
 
 ---
 
-**Last Updated:** 2026-05-15 | **Hackathon Deadline:** 15 Mei 2026, 23.00 WIB
+**Last Updated:** 2026-05-15
