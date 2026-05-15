@@ -17,35 +17,35 @@ export default function LandingPage() {
         style={{ top: "48%", right: "18%" }}
       />
 
-      <div className="absolute top-20 right-10 text-4xl opacity-50 motion-safe:animate-float-gentle md:right-24">
+      <div className="absolute top-20 right-10 text-3xl opacity-50 motion-safe:animate-float-gentle md:right-24">
         ✨
       </div>
-      <div className="absolute top-1/3 left-8 text-3xl opacity-40 motion-safe:animate-bouncy md:left-16">
+      <div className="absolute top-1/3 left-8 text-2xl opacity-40 motion-safe:animate-bouncy md:left-16">
         🌸
       </div>
       <div
-        className="absolute bottom-1/4 right-8 text-5xl opacity-45 motion-safe:animate-float-gentle md:right-32"
+        className="absolute bottom-1/4 right-8 text-4xl opacity-45 motion-safe:animate-float-gentle md:right-32"
         style={{ animationDelay: "1s" }}
       >
         💫
       </div>
 
       <div className="relative z-10 w-full max-w-6xl">
-        <div className="mb-12 text-center motion-safe:animate-fade-in-up">
-          <div className="relative mb-6 inline-block">
-            <div className="text-7xl motion-safe:animate-float-gentle md:text-8xl">💚</div>
-            <div className="absolute -right-3 -top-3 text-3xl motion-safe:animate-bouncy">✨</div>
+        <div className="mb-10 text-center motion-safe:animate-fade-in-up">
+          <div className="relative mb-4 inline-block">
+            <div className="text-6xl motion-safe:animate-float-gentle md:text-7xl">💚</div>
+            <div className="absolute -right-2 -top-2 text-2xl motion-safe:animate-bouncy">✨</div>
           </div>
-          <h1 className="mb-5 font-[var(--font-outfit)] text-6xl font-black leading-[1.05] tracking-tight gradient-text-pastel md:text-8xl lg:text-9xl">
+          <h1 className="mb-4 font-[var(--font-outfit)] text-5xl font-black leading-[1.08] tracking-tight gradient-text-pastel md:text-6xl lg:text-7xl">
             RasaKas
           </h1>
-          <p className="mx-auto max-w-3xl text-lg font-semibold leading-relaxed text-rk-muted md:text-2xl md:leading-relaxed">
+          <p className="mx-auto max-w-3xl text-base font-semibold leading-snug text-rk-muted md:text-xl md:leading-snug">
             AI yang tahu kamu belanja karena{" "}
-            <span className="mx-1 inline-block rounded-full bg-gradient-pink px-3 py-1 text-white shadow-rk-btn-primary">
+            <span className="mx-1 inline-block rounded-full bg-gradient-pink px-2.5 py-0.5 text-sm text-white shadow-rk-btn-primary">
               lapar
             </span>{" "}
             — atau karena{" "}
-            <span className="mx-1 inline-block rounded-full bg-gradient-cool px-3 py-1 text-white shadow-rk-btn-primary">
+            <span className="mx-1 inline-block rounded-full bg-gradient-cool px-2.5 py-0.5 text-sm text-white shadow-rk-btn-primary">
               luka
             </span>{" "}
             🌸
@@ -53,30 +53,30 @@ export default function LandingPage() {
         </div>
 
         <Card padding="lg" className="mb-8 motion-safe:animate-fade-in-up stagger-1">
-          <div className="flex flex-col items-center gap-8 md:flex-row">
-            <div className="flex gap-3">
-              <span className="text-5xl motion-safe:animate-bouncy md:text-6xl">✨</span>
+          <div className="flex flex-col items-center gap-6 md:flex-row">
+            <div className="flex gap-2.5">
+              <span className="text-4xl motion-safe:animate-bouncy md:text-5xl">✨</span>
               <span
-                className="text-4xl motion-safe:animate-float-gentle md:text-5xl"
+                className="text-3xl motion-safe:animate-float-gentle md:text-4xl"
                 style={{ animationDelay: "0.5s" }}
               >
                 🚀
               </span>
             </div>
             <div className="flex-1 text-center md:text-left">
-              <h2 className="mb-3 font-[var(--font-outfit)] text-2xl font-extrabold tracking-tight text-rk-ink md:text-4xl">
+              <h2 className="mb-2 font-[var(--font-outfit)] text-xl font-extrabold tracking-tight text-rk-ink md:text-2xl">
                 Mulai Perjalanan Kamu
               </h2>
-              <p className="mb-7 text-base font-medium leading-relaxed text-rk-muted md:text-lg">
+              <p className="mb-5 text-sm font-medium leading-snug text-rk-muted md:text-[15px] md:leading-snug">
                 Track mood harian, scan email bank otomatis, dan dapatkan insight AI tentang pola
                 pengeluaran kamu.
               </p>
               <Button
                 href="/api/auth/google"
-                className="w-full px-8 py-4 text-lg md:inline-flex md:w-auto"
+                className="w-full md:inline-flex md:w-auto"
               >
                 <svg
-                  className="h-7 w-7 motion-safe:transition-transform motion-safe:group-hover:rotate-12 motion-safe:group-hover:scale-110"
+                  className="h-6 w-6 motion-safe:transition-transform motion-safe:group-hover:rotate-12 motion-safe:group-hover:scale-110"
                   viewBox="0 0 24 24"
                   aria-hidden
                 >
@@ -108,10 +108,10 @@ export default function LandingPage() {
             padding="md"
             className="motion-safe:animate-fade-in-up stagger-2 motion-safe:transition-transform motion-safe:hover:scale-[1.02]"
           >
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-peach text-4xl motion-safe:animate-bouncy">
+            <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-peach text-3xl motion-safe:animate-bouncy">
               😊
             </div>
-            <h3 className="mb-2 text-center font-[var(--font-outfit)] text-xl font-extrabold text-rk-ink">
+            <h3 className="mb-1.5 text-center font-[var(--font-outfit)] text-lg font-extrabold text-rk-ink">
               Mood Check-In
             </h3>
             <p className="text-center text-sm font-medium leading-relaxed text-rk-muted">
@@ -123,10 +123,10 @@ export default function LandingPage() {
             padding="md"
             className="motion-safe:animate-fade-in-up stagger-2 motion-safe:transition-transform motion-safe:hover:scale-[1.02]"
           >
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-mint text-4xl motion-safe:animate-float-gentle">
+            <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-mint text-3xl motion-safe:animate-float-gentle">
               📧
             </div>
-            <h3 className="mb-2 text-center font-[var(--font-outfit)] text-xl font-extrabold text-rk-ink">
+            <h3 className="mb-1.5 text-center font-[var(--font-outfit)] text-lg font-extrabold text-rk-ink">
               Auto Scan
             </h3>
             <p className="text-center text-sm font-medium leading-relaxed text-rk-muted">
@@ -139,12 +139,12 @@ export default function LandingPage() {
             className="motion-safe:animate-fade-in-up stagger-3 motion-safe:transition-transform motion-safe:hover:scale-[1.02]"
           >
             <div
-              className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-cool text-4xl motion-safe:animate-bouncy"
+              className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-cool text-3xl motion-safe:animate-bouncy"
               style={{ animationDelay: "0.5s" }}
             >
               📊
             </div>
-            <h3 className="mb-2 text-center font-[var(--font-outfit)] text-xl font-extrabold text-rk-ink">
+            <h3 className="mb-1.5 text-center font-[var(--font-outfit)] text-lg font-extrabold text-rk-ink">
               AI Analysis
             </h3>
             <p className="text-center text-sm font-medium leading-relaxed text-rk-muted">
@@ -157,12 +157,12 @@ export default function LandingPage() {
             className="motion-safe:animate-fade-in-up stagger-3 motion-safe:transition-transform motion-safe:hover:scale-[1.02]"
           >
             <div
-              className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-pink text-4xl motion-safe:animate-float-gentle"
+              className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-pink text-3xl motion-safe:animate-float-gentle"
               style={{ animationDelay: "1s" }}
             >
               💬
             </div>
-            <h3 className="mb-2 text-center font-[var(--font-outfit)] text-xl font-extrabold text-rk-ink">
+            <h3 className="mb-1.5 text-center font-[var(--font-outfit)] text-lg font-extrabold text-rk-ink">
               Chat Boney
             </h3>
             <p className="text-center text-sm font-medium leading-relaxed text-rk-muted">
@@ -173,10 +173,10 @@ export default function LandingPage() {
 
         <Card
           padding="md"
-          className="flex flex-col items-center gap-4 motion-safe:animate-fade-in-up stagger-4 sm:flex-row sm:items-start"
+          className="flex flex-col items-center gap-3 motion-safe:animate-fade-in-up stagger-4 sm:flex-row sm:items-start"
         >
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-gradient-mint motion-safe:animate-bouncy">
-            <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-mint motion-safe:animate-bouncy">
+            <svg className="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -186,27 +186,27 @@ export default function LandingPage() {
             </svg>
           </div>
           <div className="flex-1 text-center sm:text-left">
-            <p className="mb-1 text-lg font-extrabold text-rk-ink">🔒 100% Aman & Privat</p>
-            <p className="text-sm font-medium leading-relaxed text-rk-muted">
+            <p className="mb-0.5 text-base font-extrabold text-rk-ink">🔒 100% Aman & Privat</p>
+            <p className="text-sm font-medium leading-snug text-rk-muted">
               Kami hanya membaca email dari bank untuk tracking pengeluaran. Data kamu terenkripsi
               end-to-end dan tidak pernah dibagikan.
             </p>
           </div>
         </Card>
 
-        <div className="mt-10 space-y-4 text-center motion-safe:animate-fade-in-up stagger-4">
-          <div className="flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 space-y-3 text-center motion-safe:animate-fade-in-up stagger-4">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <div className="h-3 w-3 animate-pulse rounded-full bg-gradient-pink" />
-            <span className="text-lg font-bold text-rk-muted">OpenClaw Agenthon 2026</span>
+            <span className="text-base font-bold text-rk-muted">OpenClaw Agenthon 2026</span>
             <div
               className="h-3 w-3 animate-pulse rounded-full bg-gradient-cool"
               style={{ animationDelay: "0.5s" }}
             />
           </div>
           <div className="flex items-center justify-center gap-2">
-            <span className="text-2xl motion-safe:animate-bouncy">🏆</span>
-            <p className="text-base font-semibold text-rk-muted">RISTEK x Build Club</p>
-            <span className="text-2xl motion-safe:animate-bouncy" style={{ animationDelay: "0.3s" }}>
+            <span className="text-xl motion-safe:animate-bouncy">🏆</span>
+            <p className="text-sm font-semibold text-rk-muted">RISTEK x Build Club</p>
+            <span className="text-xl motion-safe:animate-bouncy" style={{ animationDelay: "0.3s" }}>
               ✨
             </span>
           </div>

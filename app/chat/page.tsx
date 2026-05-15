@@ -19,15 +19,7 @@ export default function ChatPage() {
   // Mock user_id for now
   const userId = 'demo-user-123'
 
-  useEffect(() => {
-    loadChatHistory()
-  }, [])
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages])
-
-  const loadChatHistory = async () => {
+  async function loadChatHistory() {
     try {
       // TODO: Load from API
       // For now, use mock data
@@ -36,8 +28,8 @@ export default function ChatPage() {
           id: '1',
           role: 'assistant',
           content: 'Halo! Gue Boney 💚 Mau cerita apa hari ini?',
-          created_at: new Date().toISOString()
-        }
+          created_at: new Date().toISOString(),
+        },
       ])
       setIsLoadingHistory(false)
     } catch (error) {
@@ -46,9 +38,17 @@ export default function ChatPage() {
     }
   }
 
-  const scrollToBottom = () => {
+  function scrollToBottom() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    void loadChatHistory()
+  }, [])
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

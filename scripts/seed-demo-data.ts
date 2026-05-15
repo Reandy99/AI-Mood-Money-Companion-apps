@@ -31,8 +31,7 @@ async function seedDemoData() {
 
   // Seed mood logs (last 30 days)
   const moodLogs = []
-  const moodTypes = Object.keys(MOOD_CONFIG) as Array<keyof typeof MOOD_CONFIG>
-  
+
   for (let i = 0; i < 30; i++) {
     const date = new Date()
     date.setDate(date.getDate() - i)

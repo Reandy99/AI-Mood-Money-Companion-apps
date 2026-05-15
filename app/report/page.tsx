@@ -3,15 +3,28 @@
 import { useEffect, useState } from 'react'
 import { MOOD_CONFIG } from '@/lib/constants/mood'
 
+type ReportMoodPoint = { date: string; mood: string; score: number }
+type ReportExpensePoint = { date: string; amount: number; category: string }
+
+type WeeklyReportView = {
+  week_start: string
+  week_end: string
+  total_expense: number
+  dominant_mood: string
+  top_category: string
+  emotional_spending_amount: number
+  insight_text: string
+  mood_expense_correlation: {
+    moods: ReportMoodPoint[]
+    expenses: ReportExpensePoint[]
+  }
+}
+
 export default function WeeklyReportPage() {
   const [loading, setLoading] = useState(true)
-  const [report, setReport] = useState<any>(null)
+  const [report, setReport] = useState<WeeklyReportView | null>(null)
 
-  useEffect(() => {
-    loadReport()
-  }, [])
-
-  const loadReport = async () => {
+  async function loadReport() {
     // TODO: Load from API
     // Mock data for now
     setTimeout(() => {
@@ -54,6 +67,10 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
     }, 500)
   }
 
+  useEffect(() => {
+    void loadReport()
+  }, [])
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -84,7 +101,9 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
     )
   }
 
-  const maxExpense = Math.max(...report.mood_expense_correlation.expenses.map((e: any) => e.amount))
+  const maxExpense = Math.max(
+    ...report.mood_expense_correlation.expenses.map((e) => e.amount)
+  )
 
   return (
     <div className="min-h-screen p-4 md:p-8 relative overflow-hidden">
@@ -137,8 +156,10 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
             Mood 7 Hari
           </h2>
           <div className="flex gap-2 overflow-x-auto pb-2">
-            {report.mood_expense_correlation.moods.map((mood: any, index: number) => {
-              const moodType = Object.entries(MOOD_CONFIG).find(([_, config]) => config.label === mood.mood)?.[0]
+            {report.mood_expense_correlation.moods.map((mood, index) => {
+              const moodType = Object.entries(MOOD_CONFIG).find(
+                ([, config]) => config.label === mood.mood
+              )?.[0]
               const config = moodType ? MOOD_CONFIG[moodType as keyof typeof MOOD_CONFIG] : null
               const date = new Date(mood.date)
               
@@ -167,7 +188,7 @@ Saran untuk minggu depan: Kalau notice mood lagi turun, coba pause 15 menit sebe
             Pengeluaran Harian
           </h2>
           <div className="space-y-3">
-            {report.mood_expense_correlation.expenses.map((expense: any, index: number) => {
+            {report.mood_expense_correlation.expenses.map((expense, index) => {
               const date = new Date(expense.date)
               const percentage = (expense.amount / maxExpense) * 100
               

@@ -2,37 +2,44 @@
 
 import { useEffect, useState } from 'react'
 import { MOOD_CONFIG } from '@/lib/constants/mood'
+import Link from 'next/link'
+
+type CalendarMoodEntry = {
+  logged_at: string
+  mood_type: string
+  mood_label: string
+}
 
 export default function CalendarPage() {
   const [loading, setLoading] = useState(true)
-  const [moods, setMoods] = useState<any[]>([])
+  const [moods, setMoods] = useState<CalendarMoodEntry[]>([])
   const [currentMonth, setCurrentMonth] = useState(new Date())
 
-  useEffect(() => {
-    loadMoods()
-  }, [currentMonth])
-
-  const loadMoods = async () => {
+  async function loadMoods() {
     // TODO: Load from API
     // Mock data for now
     setTimeout(() => {
-      const mockMoods = []
+      const mockMoods: CalendarMoodEntry[] = []
       for (let i = 0; i < 30; i++) {
         const date = new Date()
         date.setDate(date.getDate() - i)
-        const moodTypes = Object.keys(MOOD_CONFIG)
-        const randomMood = moodTypes[Math.floor(Math.random() * moodTypes.length)]
-        
+        const moodTypeKeys = Object.keys(MOOD_CONFIG) as (keyof typeof MOOD_CONFIG)[]
+        const randomMood = moodTypeKeys[Math.floor(Math.random() * moodTypeKeys.length)]
+
         mockMoods.push({
           logged_at: date.toISOString().split('T')[0],
           mood_type: randomMood,
-          mood_label: MOOD_CONFIG[randomMood as keyof typeof MOOD_CONFIG].label
+          mood_label: MOOD_CONFIG[randomMood].label,
         })
       }
       setMoods(mockMoods)
       setLoading(false)
     }, 500)
   }
+
+  useEffect(() => {
+    void loadMoods()
+  }, [currentMonth])
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear()
@@ -69,17 +76,17 @@ export default function CalendarPage() {
       <div
         key={day}
         className={`
-          aspect-square bento-card p-2 flex flex-col items-center justify-center
+          aspect-square neo-card p-3 md:p-4 flex flex-col items-center justify-center
           transition-all hover:scale-105 cursor-pointer
-          ${isToday ? 'ring-2 ring-[#FFB5D8]' : ''}
+          ${isToday ? 'ring-4 ring-[#FF6B9D]' : ''}
         `}
         style={{
-          backgroundColor: mood ? `${MOOD_CONFIG[mood.mood_type as keyof typeof MOOD_CONFIG].color}40` : 'rgba(255,255,255,0.5)'
+          backgroundColor: mood ? `${MOOD_CONFIG[mood.mood_type as keyof typeof MOOD_CONFIG].color}40` : 'var(--neo-bg)'
         }}
       >
-        <div className="text-xs font-bold text-[#718096] mb-1">{day}</div>
+        <div className="text-sm md:text-base font-bold text-[#6B7280] mb-1">{day}</div>
         {mood && (
-          <div className="text-2xl">
+          <div className="text-3xl md:text-4xl">
             {MOOD_CONFIG[mood.mood_type as keyof typeof MOOD_CONFIG].emoji}
           </div>
         )}
@@ -91,43 +98,43 @@ export default function CalendarPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4 animate-bouncy">📅</div>
-          <p className="text-[#718096] font-medium">Loading calendar...</p>
+          <div className="neo-spinner mx-auto mb-4"></div>
+          <p className="text-[#6B7280] font-medium">Loading calendar...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute top-10 right-10 w-96 h-96 bg-gradient-mint rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape"></div>
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-pink rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob blob-shape" style={{ animationDelay: '2s' }}></div>
+    <div className="min-h-screen p-6 md:p-10 relative overflow-hidden pb-24 md:pb-10">
+      {/* Decorative Background */}
+      <div className="decorative-circle bg-gradient-mint" style={{ top: '10%', right: '10%' }}></div>
+      <div className="decorative-circle bg-gradient-pink" style={{ bottom: '20%', left: '5%' }}></div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="mb-8 animate-fade-in-up">
-          <a href="/dashboard" className="inline-flex items-center gap-2 text-[#718096] hover:text-[#2D3748] mb-4 font-medium">
+        <div className="mb-10 animate-fade-in-up">
+          <Link href="/dashboard" className="inline-flex items-center gap-2 text-[#6B7280] hover:text-[#1F2937] mb-6 font-semibold text-lg transition-colors">
             <span className="text-2xl">←</span>
             <span>Kembali</span>
-          </a>
+          </Link>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl md:text-5xl font-[var(--font-outfit)] font-black text-[#2D3748] mb-2">
+              <h1 className="text-5xl md:text-6xl font-[var(--font-outfit)] font-black text-[#1F2937] mb-3">
                 Mood Calendar 📅
               </h1>
-              <p className="text-lg text-[#718096] font-medium">
+              <p className="text-xl text-[#6B7280] font-medium">
                 {monthName}
               </p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button
                 onClick={() => {
                   const newDate = new Date(currentMonth)
                   newDate.setMonth(newDate.getMonth() - 1)
                   setCurrentMonth(newDate)
                 }}
-                className="w-12 h-12 rounded-full bg-white/60 hover:bg-white/80 flex items-center justify-center text-2xl transition-colors"
+                className="neo-btn w-14 h-14 flex items-center justify-center text-2xl"
               >
                 ←
               </button>
@@ -137,7 +144,7 @@ export default function CalendarPage() {
                   newDate.setMonth(newDate.getMonth() + 1)
                   setCurrentMonth(newDate)
                 }}
-                className="w-12 h-12 rounded-full bg-white/60 hover:bg-white/80 flex items-center justify-center text-2xl transition-colors"
+                className="neo-btn w-14 h-14 flex items-center justify-center text-2xl"
               >
                 →
               </button>
@@ -146,36 +153,36 @@ export default function CalendarPage() {
         </div>
 
         {/* Calendar */}
-        <div className="bento-card p-6 mb-6 animate-fade-in-up stagger-1">
+        <div className="neo-card p-8 mb-8 animate-fade-in-up stagger-1">
           {/* Day headers */}
-          <div className="grid grid-cols-7 gap-2 mb-4">
-            {['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'].map(day => (
-              <div key={day} className="text-center font-bold text-[#718096] text-sm">
+          <div className="grid grid-cols-7 gap-3 md:gap-4 mb-6">
+            {['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map(day => (
+              <div key={day} className="text-center font-bold text-[#6B7280] text-base md:text-lg">
                 {day}
               </div>
             ))}
           </div>
 
           {/* Calendar grid */}
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-3 md:gap-4">
             {days}
           </div>
         </div>
 
         {/* Legend */}
-        <div className="bento-card p-6 animate-fade-in-up stagger-2">
-          <h2 className="text-xl font-[var(--font-outfit)] font-bold text-[#2D3748] mb-4">
+        <div className="neo-card p-8 animate-fade-in-up stagger-2">
+          <h2 className="text-2xl font-[var(--font-outfit)] font-bold text-[#1F2937] mb-6">
             Mood Legend
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(MOOD_CONFIG).map(([type, config]) => (
               <div
                 key={type}
-                className="flex items-center gap-2 p-3 rounded-2xl"
+                className="flex items-center gap-3 p-4 rounded-2xl neo-card"
                 style={{ backgroundColor: `${config.color}30` }}
               >
-                <span className="text-2xl">{config.emoji}</span>
-                <span className="text-sm font-medium text-[#2D3748]">{config.label}</span>
+                <span className="text-3xl">{config.emoji}</span>
+                <span className="text-base font-semibold text-[#1F2937]">{config.label}</span>
               </div>
             ))}
           </div>

@@ -93,6 +93,8 @@ body {
 }
 
 body {
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--rk-ink);
   background-color: var(--rk-page);
   background-image: radial-gradient(
@@ -138,8 +140,9 @@ a {
 .neo-btn {
   background: rgba(255, 255, 255, 0.95);
   border-radius: var(--rk-radius-pill);
-  padding: 0.875rem 1.75rem;
+  padding: 0.625rem 1.25rem;
   font-weight: 700;
+  font-size: 0.875rem;
   color: var(--rk-ink);
   border: 2px solid var(--rk-border-soft);
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
@@ -160,7 +163,6 @@ a {
 .neo-btn-primary {
   border: none;
   border-radius: var(--rk-radius-pill);
-  padding: 0.875rem 1.75rem;
   font-weight: 800;
   color: #fff;
   cursor: pointer;
@@ -195,7 +197,9 @@ a {
 .rk-btn-cool {
   border: none;
   border-radius: var(--rk-radius-pill);
+  padding: 0.625rem 1.25rem;
   font-weight: 800;
+  font-size: 0.875rem;
   color: #fff;
   cursor: pointer;
   background: linear-gradient(120deg, var(--rk-iris-1) 0%, var(--rk-iris-2) 100%);
@@ -234,7 +238,7 @@ a {
 .mood-card {
   background: var(--rk-card);
   border-radius: 1.85rem;
-  padding: 1.25rem;
+  padding: 1rem;
   box-shadow: var(--rk-shadow-card);
   border: 1px solid rgba(255, 255, 255, 0.75);
   transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease;
@@ -279,14 +283,14 @@ a {
 }
 
 .blob-character {
-  width: 5rem;
-  height: 5rem;
+  width: 4.25rem;
+  height: 4.25rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
-  margin: 0 auto 0.75rem;
+  font-size: 2.25rem;
+  margin: 0 auto 0.5rem;
   position: relative;
 }
 

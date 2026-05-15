@@ -1,13 +1,17 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { createServiceClient } from '@/lib/supabase/service'
+import type { Database } from '@/types/database'
+
+type MoodLogRow = Database['public']['Tables']['mood_logs']['Row']
+type ChatHistoryRow = Database['public']['Tables']['chat_history']['Row']
 
 export interface BoneyContext {
   userId: string
-  moodHistory: any[]
+  moodHistory: MoodLogRow[]
   weeklyExpense: number
   weeklyInsight: string | null
   topCategory: string | null
-  chatHistory: any[]
+  chatHistory: ChatHistoryRow[]
 }
 
 export async function boneyAgent(userId: string, userMessage: string): Promise<ReadableStream> {

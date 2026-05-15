@@ -1,5 +1,9 @@
 import { ClaudeClient } from '@/lib/claude/client'
 import { createServiceClient } from '@/lib/supabase/service'
+import type { Database } from '@/types/database'
+
+type MoodLogRow = Database['public']['Tables']['mood_logs']['Row']
+type ExpenseLogRow = Database['public']['Tables']['expense_logs']['Row']
 
 export interface WeeklyAnalysisResult {
   userId: string
@@ -156,25 +160,33 @@ export async function patternAnalystAgent(userId: string): Promise<WeeklyAnalysi
   }
 }
 
-function getMostFrequentMood(moods: any[]): string {
-  const moodCounts = moods.reduce((acc, m) => {
-    acc[m.mood_label] = (acc[m.mood_label] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
+function getMostFrequentMood(moods: MoodLogRow[]): string {
+  const moodCounts = moods.reduce(
+    (acc, m) => {
+      acc[m.mood_label] = (acc[m.mood_label] || 0) + 1
+      return acc
+    },
+    {} as Record<string, number>
+  )
 
-  return Object.entries(moodCounts).sort((a, b) => b[1] - a[1])[0][0]
+  const top = Object.entries(moodCounts).sort((a, b) => b[1] - a[1])[0]
+  return top ? top[0] : 'Netral'
 }
 
-function getTopCategory(expenses: any[]): string {
-  const categoryCounts = expenses.reduce((acc, e) => {
-    acc[e.category] = (acc[e.category] || 0) + e.amount
-    return acc
-  }, {} as Record<string, number>)
+function getTopCategory(expenses: ExpenseLogRow[]): string {
+  const categoryCounts = expenses.reduce(
+    (acc, e) => {
+      acc[e.category] = (acc[e.category] || 0) + e.amount
+      return acc
+    },
+    {} as Record<string, number>
+  )
 
-  return Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0][0]
+  const top = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0]
+  return top ? top[0] : 'Lainnya'
 }
 
-function calculateEmotionalSpending(moods: any[], expenses: any[]): number {
+function calculateEmotionalSpending(moods: MoodLogRow[], expenses: ExpenseLogRow[]): number {
   // Moods with score <= 3 are considered negative
   const negativeMoodDates = new Set(
     moods.filter(m => m.mood_score <= 3).map(m => m.logged_at)

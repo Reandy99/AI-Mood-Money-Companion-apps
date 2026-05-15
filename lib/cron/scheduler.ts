@@ -26,7 +26,7 @@ export function initializeCronJobs() {
       // Run scanner for each user
       for (const user of users || []) {
         try {
-          await receiptScannerAgent(user.id, user.gmail_token, user.gmail_refresh_token)
+          await receiptScannerAgent(user.id, user.gmail_token, user.gmail_refresh_token ?? undefined)
           console.log(`[Cron] Completed scan for user ${user.id}`)
         } catch (error) {
           console.error(`[Cron] Failed to scan for user ${user.id}:`, error)

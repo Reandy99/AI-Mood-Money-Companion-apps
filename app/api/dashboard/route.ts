@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
-    const supabase = createServerClient()
+    const supabase = await createClient()
 
     // Get current user
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -45,20 +45,22 @@ export async function GET(request: NextRequest) {
       .gte('expense_date', weekStart.toISOString().split('T')[0])
 
     // Calculate total expense
-    const totalExpense = weeklyExpenses?.reduce((sum, exp) => sum + exp.amount, 0) || 0
+    const totalExpense =
+      weeklyExpenses?.reduce((sum: number, exp) => sum + exp.amount, 0) || 0
 
     // Calculate dominant mood
     const moodCounts: Record<string, number> = {}
-    weeklyMoods?.forEach(mood => {
+    weeklyMoods?.forEach((mood) => {
       moodCounts[mood.mood_type] = (moodCounts[mood.mood_type] || 0) + 1
     })
     const dominantMood = Object.entries(moodCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'neutral'
 
     // Calculate streak
     let streak = 0
-    const sortedMoods = weeklyMoods?.sort((a, b) => 
-      new Date(b.logged_at).getTime() - new Date(a.logged_at).getTime()
-    ) || []
+    const sortedMoods =
+      weeklyMoods?.sort(
+        (a, b) => new Date(b.logged_at).getTime() - new Date(a.logged_at).getTime()
+      ) || []
     
     for (let i = 0; i < sortedMoods.length; i++) {
       const expectedDate = new Date()

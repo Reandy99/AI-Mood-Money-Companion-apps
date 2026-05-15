@@ -7,15 +7,15 @@ type CardProps = HTMLAttributes<HTMLDivElement> & {
 
 const pad: Record<NonNullable<CardProps["padding"]>, string> = {
   none: "",
-  sm: "p-4",
-  md: "p-6",
-  lg: "p-8 md:p-10",
+  sm: "p-3.5",
+  md: "p-5",
+  lg: "p-6 md:p-8",
 };
 
 export function Card({
   children,
   className = "",
-  padding = "md",
+  padding = "sm",
   ...rest
 }: CardProps) {
   return (

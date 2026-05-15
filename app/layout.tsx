@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Nunito, Quicksand } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
+import Sidebar from "@/components/Sidebar";
 
 const nunito = Nunito({
   variable: "--font-outfit",
@@ -42,9 +42,11 @@ export default function RootLayout({
       lang="id"
       className={`${nunito.variable} ${quicksand.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen font-[var(--font-inter)] antialiased pb-20 md:pb-0">
-        {children}
-        <Navigation />
+      <body className="min-h-screen font-[var(--font-inter)] antialiased">
+        <Sidebar />
+        <div className="md:ml-72">
+          {children}
+        </div>
       </body>
     </html>
   );

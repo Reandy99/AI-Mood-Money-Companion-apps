@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = createServerClient()
+    const supabase = await createClient()
     const { searchParams } = new URL(request.url)
     const period = searchParams.get('period') || 'week' // week, month, all
 
@@ -48,10 +48,10 @@ export async function GET(request: NextRequest) {
     }
 
     // Calculate summary
-    const total = expenses?.reduce((sum, exp) => sum + exp.amount, 0) || 0
+    const total = expenses?.reduce((sum: number, exp) => sum + exp.amount, 0) || 0
     const categoryCounts: Record<string, { count: number; total: number }> = {}
-    
-    expenses?.forEach(exp => {
+
+    expenses?.forEach((exp) => {
       if (!categoryCounts[exp.category]) {
         categoryCounts[exp.category] = { count: 0, total: 0 }
       }

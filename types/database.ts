@@ -46,6 +46,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       mood_logs: {
         Row: {
@@ -84,6 +85,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       expense_logs: {
         Row: {
@@ -119,6 +121,7 @@ export interface Database {
           raw_email_snippet?: string | null
           created_at?: string
         }
+        Relationships: []
       }
       weekly_reports: {
         Row: {
@@ -160,6 +163,7 @@ export interface Database {
           emotional_spending_amount?: number | null
           created_at?: string
         }
+        Relationships: []
       }
       chat_history: {
         Row: {
@@ -183,6 +187,7 @@ export interface Database {
           content?: string
           created_at?: string
         }
+        Relationships: []
       }
       agent_logs: {
         Row: {
@@ -218,6 +223,7 @@ export interface Database {
           error_message?: string | null
           created_at?: string
         }
+        Relationships: []
       }
     }
     Views: {

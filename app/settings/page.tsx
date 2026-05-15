@@ -6,7 +6,11 @@ import { useRouter } from 'next/navigation'
 export default function SettingsPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<{
+    email: string
+    name: string
+    avatar_url: string | null
+  } | null>(null)
   const [gmailConnected, setGmailConnected] = useState(false)
   const [disconnecting, setDisconnecting] = useState(false)
 

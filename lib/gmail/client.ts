@@ -1,15 +1,17 @@
 import { google } from 'googleapis'
+import type { gmail_v1 } from 'googleapis'
+import type { OAuth2Client } from 'google-auth-library'
 
 export interface GmailMessage {
   id: string
   threadId: string
   snippet: string
-  payload: any
+  payload?: gmail_v1.Schema$MessagePart
   internalDate: string
 }
 
 export class GmailClient {
-  private oauth2Client: any
+  private oauth2Client: OAuth2Client
 
   constructor(accessToken: string, refreshToken?: string) {
     this.oauth2Client = new google.auth.OAuth2(
@@ -80,13 +82,19 @@ export class GmailClient {
 
   extractSubject(message: GmailMessage): string {
     const headers = message.payload?.headers || []
-    const subjectHeader = headers.find((h: any) => h.name.toLowerCase() === 'subject')
+    const subjectHeader = headers.find(
+      (h): h is gmail_v1.Schema$MessagePartHeader =>
+        Boolean(h && typeof h === 'object' && 'name' in h && String(h.name).toLowerCase() === 'subject')
+    )
     return subjectHeader?.value || ''
   }
 
   extractFrom(message: GmailMessage): string {
     const headers = message.payload?.headers || []
-    const fromHeader = headers.find((h: any) => h.name.toLowerCase() === 'from')
+    const fromHeader = headers.find(
+      (h): h is gmail_v1.Schema$MessagePartHeader =>
+        Boolean(h && typeof h === 'object' && 'name' in h && String(h.name).toLowerCase() === 'from')
+    )
     return fromHeader?.value || ''
   }
 
