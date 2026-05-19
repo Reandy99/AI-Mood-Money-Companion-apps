@@ -123,3 +123,39 @@ Do not downgrade to `claude-3-*` series without explicit instruction. Pattern An
 ## Red Flag Detection — Safety First
 
 `detectRedFlags()` in `boney.ts` runs **before** the LLM call, not after. If you add new crisis keywords, add them to the `redFlagKeywords` array. The hotline number in the response (`119 ext 8`) is Into The Light Indonesia — do not change this without verifying the replacement is a verified Indonesian crisis line.
+
+---
+
+## Cursor Cloud specific instructions
+
+### Quick Reference
+
+| Task | Command |
+|------|---------|
+| Install deps | `npm install` |
+| Dev server | `npm run dev` (starts on port 3000) |
+| Lint | `npx eslint .` |
+| Build | `npm run build` |
+| Seed demo data | `npm run seed` (requires valid Supabase credentials) |
+
+### Environment Variables
+
+The app requires a `.env.local` file in the project root. Key variables:
+- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` — required for any Supabase interaction
+- `ANTHROPIC_API_KEY` — required for Boney chat, expense parsing, pattern analysis
+- `CRON_SECRET` — required for agent/cron API endpoints
+- `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI` — only needed for Gmail receipt scanning
+
+With placeholder values, the dev server starts and renders all pages, but API calls to Supabase/Anthropic will fail.
+
+### Known Build Issue
+
+`npm run build` fails at the TypeScript type-check step due to a pre-existing duplicate property in `app/api/agents/daily-summary/route.ts` (line 44: `userId` specified twice). The dev server (`npm run dev`) is unaffected.
+
+### No Test Framework
+
+This project has no automated test runner or test files. Verification is done via lint (`npx eslint .`) and manual testing through the browser.
+
+### Dev Server Startup
+
+Next.js 16 with Turbopack starts in ~300ms. The `.env.local` file is auto-loaded. After changing `.env.local`, you must restart the dev server.
